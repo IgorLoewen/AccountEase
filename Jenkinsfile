@@ -1,46 +1,56 @@
 pipeline {
     agent any
+
     tools {
-        maven 'Maven' // Stelle sicher, dass Maven in Jenkins konfiguriert ist
-        jdk 'JDK17'   // Nutze JDK 17
+        maven 'Maven' // Ensure Maven is configured in Jenkins
+        jdk 'JDK17'   // Use JDK 17 as the Java runtime
     }
+
     stages {
         stage('Checkout') {
             steps {
-                checkout scm // Holt den Code aus dem Repository
+                // Retrieve the source code from the repository
+                checkout scm
             }
         }
         stage('Build') {
             steps {
-                sh 'mvn clean install' // Baut das Projekt
+                // Clean the project and build the artifacts
+                sh 'mvn clean install'
             }
         }
         stage('Run Tests') {
             steps {
-                sh 'mvn test' // Führt die Tests aus
+                // Execute unit and integration tests
+                sh 'mvn test'
             }
         }
         stage('Allure Report') {
             steps {
+                // Generate Allure report based on the test results
                 allure([
                     includeProperties: false,
-                    jdk: '',
-                    properties: [],
-                    reportBuildPolicy: 'ALWAYS', // Generiere immer den Report
-                    results: [[path: 'target/allure-results']] // Pfad zu den Allure-Resultaten
+                    jdk: '', // Leave JDK configuration empty if not explicitly required
+                    properties: [], // Add any specific Allure properties here if needed
+                    reportBuildPolicy: 'ALWAYS', // Always generate the Allure report
+                    results: [[path: 'target/allure-results']] // Path to Allure results
                 ])
             }
         }
     }
+
     post {
         always {
-            echo 'Build abgeschlossen.' // Loggt eine Abschlussmeldung
+            // Log a completion message regardless of the build result
+            echo 'Build completed.'
         }
         success {
-            echo 'Build erfolgreich!' // Loggt eine Erfolgsmeldung
+            // Log a success message when the build passes
+            echo 'Build successful!'
         }
         failure {
-            echo 'Build fehlgeschlagen!' // Loggt eine Fehlermeldung
+            // Log a failure message when the build fails
+            echo 'Build failed!'
         }
     }
 }
