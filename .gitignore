@@ -45,6 +45,7 @@ Thumbs.db
 *.swp
 
 # Ignore sensitive files
+.allure/
 # Ignore private files and folders
 private/
 secrets/
