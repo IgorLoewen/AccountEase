@@ -1,12 +1,12 @@
-package com.example.accounteasa.api.amazonseller;
+package com.example;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
 
-public class FirstTest {
+public class SecondTest {
 
     @Test    // Example test to validate API setup and basic request structure
     public void testGetRequest() {
