@@ -18,7 +18,7 @@ public class AmazonExcelFilter {
         String inputFilePath = desktopPath + File.separator + inputFileName;
 
         // Номер заказа для фильтрации
-        String transactionEventID = "028-6823163-6617917"; // Пример номера
+        String transactionEventID = "028-6901747-5745101"; // Пример номера
 
         try (FileInputStream fis = new FileInputStream(inputFilePath);
              Workbook workbook = new XSSFWorkbook(fis)) {
