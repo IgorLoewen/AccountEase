@@ -4,6 +4,8 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -20,9 +22,15 @@ import java.util.*;
  */
 public class IncomeReportColumnCalculator {
 
+    private static final SimpleDateFormat INPUT_DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+
     public static void main(String[] args) {
         // Path to the Excel file
         String filePath = "/Users/GiorUg/Desktop/Desktop PC bis 2023/2024CompleteReportTransaktions.xlsx";
+
+        // Global date range filter with time in dd.MM.yyyy HH:mm:ss format
+        String startDateStr = "01.08.2024 00:00:00";
+        String endDateStr = "31.12.2024 23:59:59";
 
         try (FileInputStream fis = new FileInputStream(filePath);
              Workbook workbook = new XSSFWorkbook(fis)) {
@@ -62,10 +70,21 @@ public class IncomeReportColumnCalculator {
                 negativeSums.put(column, 0.0);
             }
 
+            // Convert start and end dates to Date objects for comparison
+            Date startDate = INPUT_DATE_FORMAT.parse(startDateStr);
+            Date endDate = INPUT_DATE_FORMAT.parse(endDateStr);
+
             // Summing up values
             for (int rowNum = 8; rowNum <= sheet.getLastRowNum(); rowNum++) {
                 Row row = sheet.getRow(rowNum);
                 if (row == null) continue;
+
+                // Apply date filter
+                String rawDateStr = getCellValue(row, columnIndexMap.get("Datum/Uhrzeit"));
+                Date rowDate = convertToDate(rawDateStr);
+                if (rowDate == null || rowDate.before(startDate) || rowDate.after(endDate)) {
+                    continue;
+                }
 
                 for (String column : numericColumns) {
                     Integer columnIndex = columnIndexMap.get(column);
@@ -102,8 +121,24 @@ public class IncomeReportColumnCalculator {
                 System.out.println("  Summe der negativen Werte: " + negativeSums.get(column));
             }
 
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             System.err.println("Fehler: " + e.getMessage());
+        }
+    }
+
+    private static String getCellValue(Row row, Integer columnIndex) {
+        if (columnIndex == null || row == null) return "";
+        Cell cell = row.getCell(columnIndex);
+        return cell != null ? cell.toString().trim() : "";
+    }
+
+    private static Date convertToDate(String dateStr) {
+        if (dateStr == null || dateStr.isEmpty()) return null;
+        try {
+            return INPUT_DATE_FORMAT.parse(dateStr.replace(" UTC", "").trim());
+        } catch (ParseException e) {
+            System.err.println("Ошибка преобразования даты: " + dateStr);
+            return null;
         }
     }
 }
