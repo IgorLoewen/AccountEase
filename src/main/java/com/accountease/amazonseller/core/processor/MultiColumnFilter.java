@@ -39,7 +39,8 @@ public class MultiColumnFilter {
 
         for (Map<String, String> row : data) {
             String cellValue = row.getOrDefault(columnName, "").trim();
-            if (filterValues.isEmpty() || filterValues.contains(cellValue)) {
+            // Handle single or multiple filter values
+            if (filterValues == null || filterValues.isEmpty() || filterValues.contains(cellValue)) {
                 filteredData.add(row);
             }
         }
