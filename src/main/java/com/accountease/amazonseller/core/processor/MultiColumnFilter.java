@@ -29,8 +29,8 @@ public class MultiColumnFilter {
     /**
      * Filters the data based on a single column and its filter values.
      *
-     * @param data        The list of rows (each row is a map of column names to values).
-     * @param columnName  The column to filter by.
+     * @param data         The list of rows (each row is a map of column names to values).
+     * @param columnName   The column to filter by.
      * @param filterValues The filter values for the column.
      * @return A filtered list of rows.
      */
