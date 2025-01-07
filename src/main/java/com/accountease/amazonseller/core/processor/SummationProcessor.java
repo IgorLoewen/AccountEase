@@ -10,12 +10,13 @@ public class SummationProcessor {
      * Calculates the positive and negative sums for specified numeric columns.
      *
      * @param data          The list of rows (each row is a map of column names to values).
-     * @param numericColumns List of column names to calculate sums for.
+     * @param numericColumns List of column names to calculate sums for (varargs).
      * @return A map where each key is a column name, and each value is another map with positive and negative sums.
      */
-    public Map<String, Map<String, Double>> calculateSums(List<Map<String, String>> data, List<String> numericColumns) {
+    public Map<String, Map<String, Double>> calculateSums(List<Map<String, String>> data, String... numericColumns) {
         Map<String, Map<String, Double>> columnSums = new HashMap<>();
 
+        // Initialize sums for each column
         for (String column : numericColumns) {
             Map<String, Double> sums = new HashMap<>();
             sums.put("positive", 0.0);
@@ -23,6 +24,7 @@ public class SummationProcessor {
             columnSums.put(column, sums);
         }
 
+        // Process each row
         for (Map<String, String> row : data) {
             for (String column : numericColumns) {
                 String valueStr = row.getOrDefault(column, "").replace(",", ".").trim();
