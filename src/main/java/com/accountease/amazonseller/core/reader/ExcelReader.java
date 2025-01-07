@@ -10,13 +10,13 @@ import java.util.*;
 public class ExcelReader {
 
     /**
-     * Reads data from an Excel file and returns it as a list of maps.
-     * Each map represents a row, where the keys are column names.
+     * Читает данные из Excel-файла и возвращает их в виде списка карт.
+     * Каждая карта представляет строку, где ключами являются названия колонок.
      *
-     * @param filePath       Path to the Excel file.
-     * @param headerRowIndex Index of the row containing column headers.
-     * @return List of rows represented as maps.
-     * @throws IOException If an error occurs while reading the file.
+     * @param filePath       Путь к Excel-файлу.
+     * @param headerRowIndex Индекс строки, содержащей заголовки колонок.
+     * @return Список строк, представленных в виде карт.
+     * @throws IOException Если при чтении файла произошла ошибка.
      */
     public static List<Map<String, String>> readExcel(String filePath, int headerRowIndex) throws IOException {
         List<Map<String, String>> rows = new ArrayList<>();
@@ -28,7 +28,7 @@ public class ExcelReader {
             Row headerRow = sheet.getRow(headerRowIndex);
 
             if (headerRow == null) {
-                throw new IllegalArgumentException("Header row not found at index: " + headerRowIndex);
+                throw new IllegalArgumentException("Строка с заголовками не найдена по индексу: " + headerRowIndex);
             }
 
             // Считываем заголовки колонок
