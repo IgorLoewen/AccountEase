@@ -5,6 +5,8 @@ import com.accountease.amazonseller.core.reader.ExcelReader;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +17,7 @@ public class IncomeReportColumnCalculator {
         ProcessingParameters parameters = new ProcessingParameters(
                 "/Users/GiorUg/Desktop/Desktop PC bis 2023/2024CompleteReportTransaktions.xlsx",
                 "01.08.2024 00:00:00",
-                "31.12.2024 23:59:59",
+                "10.10.2024 23:59:59",
                 "dd.MM.yyyy HH:mm:ss"
         );
 
@@ -32,43 +34,30 @@ public class IncomeReportColumnCalculator {
             );
             List<Map<String, String>> filteredData = dateFilter.filter(data);
 
-            // Настраиваем фильтр для колонки "Typ"
-            ColumnFilter columnFilter = new ColumnFilter();
+            // Настраиваем фильтры для нескольких колонок
+            MultiColumnFilter multiColumnFilter = new MultiColumnFilter();
+            Map<String, List<String>> columnFilters = new HashMap<>();
+            columnFilters.put("Typ", Arrays.asList("Servicegebühr", "Verbindlichkeit", "Erstattung")); // Фильтры для "Typ"
+            columnFilters.put("Versand", Arrays.asList("Amazon",""));        // Фильтры для "Versand"
+            //columnFilters.put("Beschreibung", Arrays.asList(null, null));
 
-//                        // Уникальные значения для колонки "Versand"
-//            UniqueValuesProcessor uniqueValuesProcessor = new UniqueValuesProcessor();
-//            List<String> uniqueValues = uniqueValuesProcessor.getUniqueValues(filteredData, "Versand");
-//
-//            // Выводим уникальные значения
-//            System.out.println("Уникальные значения в колонке 'Versand':");
-//            uniqueValues.forEach(System.out::println);
+            // Фильтрация по колонкам
+            List<Map<String, String>> multiFilteredData = multiColumnFilter.filterByColumns(columnFilters, filteredData);
 
-
-            // Несколько фильтров. Можно одну колонку выбирать, а можно несколько
-            List<Map<String, String>> typeFilteredData = columnFilter.filterByColumn(
-                    filteredData,
-                    "Typ",
-                     "Servicegebühr", "Verbindlichkeit", "Versand durch Amazon Lagergebühr", "Bestellung", "Übertrag", "Anpassung"
-            );
-
-
-            // Подсчёт сумм после фильтрации. Можно одну колонку выбирать, а можно несколько
             SummationProcessor summationProcessor = new SummationProcessor();
             Map<String, Map<String, Double>> sums = summationProcessor.calculateSums(
-                    typeFilteredData,
-                    "Rabatte aus Werbeaktionen"
+                    multiFilteredData,
+                    List.of("Verkaufsgebühren", "Gesamt")
             );
-//
-//            System.out.println("Данные для подсчёта сумм:");
-//            typeFilteredData.forEach(System.out::println);
 
-            // Вывод результатов подсчёта
-            System.out.println("Результаты подсчёта сумм после фильтрации:");
+// Вывод результатов
+            System.out.println("Результаты подсчёта для нескольких колонок:");
             sums.forEach((column, sumMap) -> {
                 System.out.println("Колонка: " + column);
                 System.out.println("  Положительная сумма: " + sumMap.get("positive"));
                 System.out.println("  Отрицательная сумма: " + sumMap.get("negative"));
             });
+
 
         } catch (IOException | ParseException e) {
             System.err.println("Ошибка: " + e.getMessage());
