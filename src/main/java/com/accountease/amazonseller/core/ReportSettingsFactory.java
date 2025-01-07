@@ -5,14 +5,14 @@ import java.util.Map;
 
 public class ReportSettingsFactory {
 
-    public static ReportSetting createSalesReport() {
+    public static ReportSetting createShippingFeeReport() {
         return new ReportSetting(
-                "Sales Report",
+                "Verkaufsgebühren Versand durch Verkäufer",
                 Map.of(
                         "Typ", List.of("Bestellung"),
                         "Versand", List.of("Verkäufer")
                 ),
-                List.of("Umsätze", "Verkaufsgebühren")
+                List.of("Verkaufsgebühren")
         );
     }
 

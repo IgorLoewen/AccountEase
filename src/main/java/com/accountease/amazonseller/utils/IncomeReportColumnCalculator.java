@@ -7,7 +7,6 @@ import com.accountease.amazonseller.core.reader.ExcelReader;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,29 +29,20 @@ public class IncomeReportColumnCalculator {
             List<Map<String, String>> filteredData = dateFilter.filter(data);
 
             // Выбираем отчёт (например, продажи)
-            ReportSetting report = ReportSettingsFactory.createSalesReport();
+            ReportSetting report = ReportSettingsFactory.createShippingFeeReport();
 
             // Применяем фильтры
             List<Map<String, String>> reportData = report.applyFilters(filteredData);
 
-            // Подсчитываем суммы
-            Map<String, Map<String, Double>> sums = report.calculateSums(reportData);
-            Map<String, Double> totalSums = report.getSummedValues(reportData);
+            // Подсчитываем сумму по новой логике
+            Double totalSum = report.calculateSums(reportData);
 
             // Выводим результаты
-            System.out.println("Результаты для отчёта: " + report.getName());
-            sums.forEach((column, sumMap) -> {
-                System.out.println("Колонка: " + column);
-                System.out.println("  Положительная сумма: " + sumMap.get("positive"));
-                System.out.println("  Отрицательная сумма: " + sumMap.get("negative"));
-            });
-
-            System.out.println("Итоговые суммы:");
-            System.out.println("  Общая положительная сумма: " + totalSums.get("totalPositive"));
-            System.out.println("  Общая отрицательная сумма: " + totalSums.get("totalNegative"));
+            System.out.println(report.getName());
+            System.out.println(totalSum);
 
         } catch (IOException | ParseException e) {
-            System.err.println("Ошибка: " + e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 }

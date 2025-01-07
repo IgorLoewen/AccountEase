@@ -41,34 +41,13 @@ public class ReportSetting {
     }
 
     /**
-     * Подсчитывает суммы для указанных колонок.
+     * Подсчитывает сумму для указанных колонок.
      *
      * @param filteredData Отфильтрованные данные.
-     * @return Суммы для колонок.
+     * @return Общая сумма для всех колонок.
      */
-    public Map<String, Map<String, Double>> calculateSums(List<Map<String, String>> filteredData) {
+    public Double calculateSums(List<Map<String, String>> filteredData) {
         SummationProcessor processor = new SummationProcessor();
-        return processor.calculateSums(filteredData, numericColumns);
-    }
-
-    /**
-     * Возвращает отдельно суммы плюсов и минусов по всем указанным колонкам.
-     *
-     * @param filteredData Отфильтрованные данные.
-     * @return Map с итоговыми плюсовыми и минусовыми суммами.
-     */
-    public Map<String, Double> getSummedValues(List<Map<String, String>> filteredData) {
-        SummationProcessor processor = new SummationProcessor();
-        Map<String, Map<String, Double>> sums = processor.calculateSums(filteredData, numericColumns);
-
-        double totalPositive = sums.values().stream()
-                .mapToDouble(sumMap -> sumMap.get("positive"))
-                .sum();
-
-        double totalNegative = sums.values().stream()
-                .mapToDouble(sumMap -> sumMap.get("negative"))
-                .sum();
-
-        return Map.of("totalPositive", totalPositive, "totalNegative", totalNegative);
+        return processor.calculateTotalSum(filteredData, numericColumns);
     }
 }
