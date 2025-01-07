@@ -21,8 +21,7 @@ public class ExcelReader {
     public static List<Map<String, String>> readExcel(String filePath, int headerRowIndex) throws IOException {
         List<Map<String, String>> rows = new ArrayList<>();
 
-        try (FileInputStream fis = new FileInputStream(filePath);
-             Workbook workbook = new XSSFWorkbook(fis)) {
+        try (FileInputStream fis = new FileInputStream(filePath); Workbook workbook = new XSSFWorkbook(fis)) {
 
             Sheet sheet = workbook.getSheetAt(0); // Первый лист
             Row headerRow = sheet.getRow(headerRowIndex);

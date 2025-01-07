@@ -9,7 +9,7 @@ public class SummationProcessor {
     /**
      * Calculates the positive and negative sums for specified numeric columns.
      *
-     * @param data          The list of rows (each row is a map of column names to values).
+     * @param data           The list of rows (each row is a map of column names to values).
      * @param numericColumns List of column names to calculate sums for.
      * @return A map where each key is a column name, and each value is another map with positive and negative sums.
      */
@@ -42,5 +42,16 @@ public class SummationProcessor {
         }
 
         return columnSums;
+    }
+
+    /**
+     * Overloaded method to calculate sums for a single column.
+     *
+     * @param data         The list of rows (each row is a map of column names to values).
+     * @param singleColumn The column name to calculate sums for.
+     * @return A map where the key is the column name, and the value is another map with positive and negative sums.
+     */
+    public Map<String, Map<String, Double>> calculateSums(List<Map<String, String>> data, String singleColumn) {
+        return calculateSums(data, List.of(singleColumn));
     }
 }
