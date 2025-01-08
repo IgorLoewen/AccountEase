@@ -14,22 +14,15 @@ public class ReportSetting {
     private final List<String> numericColumns; // Колонки для подсчёта
 
     // Глобальные параметры для обработки данных
-    private static String filePath; // Путь к файлу
-    private static String startDate; // Начальная дата
-    private static String endDate; // Конечная дата
-    private static SimpleDateFormat dateFormat; // Формат даты
+    private static final String filePath = "/Users/GiorUg/Desktop/Desktop PC bis 2023/2024CompleteReportTransaktions.xlsx"; // Путь к файлу
+    private static final String startDate = "01.07.2024 00:00:00"; // Начальная дата
+    private static final String endDate = "31.12.2024 23:59:59"; // Конечная дата
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss"); // Формат даты
 
     public ReportSetting(String name, Map<String, List<String>> columnFilters, List<String> numericColumns) {
         this.name = name;
         this.columnFilters = columnFilters;
         this.numericColumns = numericColumns;
-    }
-
-    public static void setGlobalParameters(String filePath, String startDate, String endDate, String dateFormatPattern) {
-        ReportSetting.filePath = filePath;
-        ReportSetting.startDate = startDate;
-        ReportSetting.endDate = endDate;
-        ReportSetting.dateFormat = new SimpleDateFormat(dateFormatPattern);
     }
 
     public String getName() {

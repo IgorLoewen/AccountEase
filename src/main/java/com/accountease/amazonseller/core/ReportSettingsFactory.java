@@ -26,4 +26,15 @@ public class ReportSettingsFactory {
                 List.of("Verkaufsgebühren")
         );
     }
+
+    public static ReportSetting createSalesReportSeller() {
+        return new ReportSetting(
+                "Verkäufe, die durch Verkäufer selbst verschickt wurden",
+                Map.of(
+                        "Typ", List.of("Bestellung"),
+                        "Versand", List.of("Verkäufer")
+                ),
+                List.of("Umsätze")
+        );
+    }
 }
