@@ -25,6 +25,7 @@ public class IncomeReportColumnCalculator {
             processAndPrintReport(ReportSettingsFactory.createPromotionalDiscountsFees(), data);
             processAndPrintReport(ReportSettingsFactory.createAdjustmentsFees(), data);
             processAndPrintReport(ReportSettingsFactory.getTotalServiceFees(), data);
+            processAndPrintReport(ReportSettingsFactory.getTotalStorageAndServiceFeesForAmazonFulfillment(), data);
 
         } catch (IOException e) {
             System.err.println(e.getMessage());

@@ -105,6 +105,15 @@ public class ReportSettingsFactory {
         );
     }
 
-
+    public static ReportSetting getTotalStorageAndServiceFeesForAmazonFulfillment() {
+        return new ReportSetting(
+                "Lagerbestands- und Service-Gebühren für Versand durch Amazon",
+                Map.of(
+                        "Typ", List.of("Versand durch Amazon Lagergebühr"),
+                        "Beschreibung", List.of()
+                ),
+                List.of("Gesamt")
+        );
+    }
 
 }
