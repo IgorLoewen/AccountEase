@@ -37,11 +37,25 @@ public class MultiColumnFilter {
     private List<Map<String, String>> filterBySingleColumn(List<Map<String, String>> data, String columnName, List<String> filterValues) {
         List<Map<String, String>> filteredData = new ArrayList<>();
 
+        // Check if it's an "exclude filter" (contains "!exclude")
+        boolean isExcludeFilter = filterValues != null && !filterValues.isEmpty() && filterValues.contains("!exclude");
+
         for (Map<String, String> row : data) {
             String cellValue = row.getOrDefault(columnName, "").trim();
-            // Handle single or multiple filter values
-            if (filterValues == null || filterValues.isEmpty() || filterValues.contains(cellValue)) {
-                filteredData.add(row);
+
+            if (isExcludeFilter) {
+                // Exclude rows where the value matches any filter value (except "!exclude")
+                boolean matchesExclude = filterValues.stream()
+                        .filter(value -> !value.equals("!exclude"))
+                        .anyMatch(value -> value.equals(cellValue));
+                if (!matchesExclude) {
+                    filteredData.add(row);
+                }
+            } else {
+                // Include rows where the value matches any filter value
+                if (filterValues == null || filterValues.isEmpty() || filterValues.contains(cellValue)) {
+                    filteredData.add(row);
+                }
             }
         }
 

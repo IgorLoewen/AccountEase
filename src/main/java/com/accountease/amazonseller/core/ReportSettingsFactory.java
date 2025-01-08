@@ -71,5 +71,40 @@ public class ReportSettingsFactory {
         );
     }
 
+    public static ReportSetting createPromotionalDiscountsFees() {
+        return new ReportSetting(
+                "Werbeaktionsrabatte",
+                Map.of(
+                        "Typ", List.of("Bestellung"),
+                        "Versand", List.of()
+                ),
+                List.of("Rabatte aus Werbeaktionen")
+        );
+    }
+
+    public static ReportSetting createAdjustmentsFees() {
+        return new ReportSetting(
+                "Anpassungen",
+                Map.of(
+                        "Typ", List.of("Anpassung"),
+                        "Beschreibung", List.of("Versand durch Amazon Erstattung für Lagerbestand -  Allgemeine Anpassung")
+                ),
+                List.of("Gesamt")
+        );
+    }
+
+       // Описан случай, где выбор наоборот исключает колонки с выбора. Другие все выбираются!
+    public static ReportSetting getTotalServiceFees() {
+        return new ReportSetting(
+                "Servicegebühren",
+                Map.of(
+                        "Typ", List.of("Servicegebühr"),
+                        "Beschreibung", List.of("!exclude", "Werbekosten")  // Исключающий фильтр
+                ),
+                List.of("Gesamt")
+        );
+    }
+
+
 
 }
