@@ -12,10 +12,16 @@ public class IncomeReportColumnCalculator {
 
     public static void main(String[] args) {
         try {
-            // Чтение данных из Excel-файла
-            List<Map<String, String>> data = ExcelReader.readExcel(
-                    "/Users/GiorUg/Desktop/Desktop PC bis 2023/2024CompleteReportTransaktions.xlsx", 7
+            // Устанавливаем глобальные параметры
+            ReportSetting.setGlobalParameters(
+                    "/Users/GiorUg/Desktop/Desktop PC bis 2023/2024CompleteReportTransaktions.xlsx",
+                    "01.07.2024 00:00:00",
+                    "31.12.2024 23:59:59",
+                    "dd.MM.yyyy HH:mm:ss"
             );
+
+            // Чтение данных из Excel-файла
+            List<Map<String, String>> data = ExcelReader.readExcel(ReportSetting.getFilePath(), 7);
 
             // Обрабатываем и выводим отчеты
             processAndPrintReport(ReportSettingsFactory.createSellerShippingFeeReport(), data);
@@ -25,6 +31,7 @@ public class IncomeReportColumnCalculator {
             System.err.println(e.getMessage());
         }
     }
+
 
     /**
      * Обрабатывает и выводит данные отчета.
