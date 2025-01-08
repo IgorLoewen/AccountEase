@@ -37,4 +37,39 @@ public class ReportSettingsFactory {
                 List.of("Umsätze")
         );
     }
+
+    public static ReportSetting createSalesReportAmazon() {
+        return new ReportSetting(
+                "Verkäufe mit Versand durch Amazon",
+                Map.of(
+                        "Typ", List.of("Bestellung"),
+                        "Versand", List.of("Amazon")
+                ),
+                List.of("Umsätze")
+        );
+    }
+
+    public static ReportSetting createAdvertisingCostsReport() {
+        return new ReportSetting(
+                "Werbekosten",
+                Map.of(
+                        "Typ", List.of("Servicegebühr"),
+                        "Beschreibung", List.of("Werbekosten")
+                ),
+                List.of("Gesamt")
+        );
+    }
+
+    public static ReportSetting createAmazonFulfillmentFees() {
+        return new ReportSetting(
+                "Transaktionsgebühren Versand durch Amazon",
+                Map.of(
+                        "Typ", List.of("Bestellung"),
+                        "Versand", List.of()
+                ),
+                List.of("Gebühren zu Versand durch Amazon")
+        );
+    }
+
+
 }
