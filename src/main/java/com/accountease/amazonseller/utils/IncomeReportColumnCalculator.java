@@ -26,6 +26,12 @@ public class IncomeReportColumnCalculator {
             processAndPrintReport(ReportSettingsFactory.createAdjustmentsFees(), data);
             processAndPrintReport(ReportSettingsFactory.getTotalServiceFees(), data);
             processAndPrintReport(ReportSettingsFactory.getTotalStorageAndServiceFeesForAmazonFulfillment(), data);
+            processAndPrintReport(ReportSettingsFactory.getTotalRefundsForShippingCredits(), data);
+            processAndPrintReport(ReportSettingsFactory.getTotalRefundsForPromotionalDiscounts(), data);
+            processAndPrintReport(ReportSettingsFactory.getTotalShippingCreditNotes(), data);
+            processAndPrintReport(ReportSettingsFactory.getTotalFBALogisticsInventoryCredits(), data);
+            processAndPrintReport(ReportSettingsFactory.getTotalRefundsForAmazonShippedItems(), data);
+            processAndPrintReport(ReportSettingsFactory.getTotalRefundsForAmazonTransactionFees(), data);
 
         } catch (IOException e) {
             System.err.println(e.getMessage());
