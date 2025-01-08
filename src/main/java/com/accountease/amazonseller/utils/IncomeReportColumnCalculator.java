@@ -28,21 +28,30 @@ public class IncomeReportColumnCalculator {
             DateFilter dateFilter = new DateFilter("Datum/Uhrzeit", parameters.getStartDate(), parameters.getEndDate(), parameters.getDateFormat());
             List<Map<String, String>> filteredData = dateFilter.filter(data);
 
-            // Выбираем отчёт (например, продажи)
-            ReportSetting report = ReportSettingsFactory.createShippingFeeReport();
-
-            // Применяем фильтры
-            List<Map<String, String>> reportData = report.applyFilters(filteredData);
-
-            // Подсчитываем сумму по новой логике
-            Double totalSum = report.calculateSums(reportData);
-
-            // Выводим результаты
-            System.out.println(report.getName());
-            System.out.println(totalSum);
+            // Обрабатываем и выводим отчеты
+            processAndPrintReport(ReportSettingsFactory.createSellerShippingFeeReport(), filteredData);
+            processAndPrintReport(ReportSettingsFactory.createAmazonShippingFeeReport(), filteredData);
 
         } catch (IOException | ParseException e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    /**
+     * Обрабатывает и выводит данные отчета.
+     *
+     * @param report       Настройка отчета, включая название, фильтры и колонки для подсчёта.
+     * @param filteredData Отфильтрованные данные, готовые для дальнейшей обработки.
+     */
+    private static void processAndPrintReport(ReportSetting report, List<Map<String, String>> filteredData) {
+        // Применяем фильтры к данным на основе настроек отчета
+        List<Map<String, String>> reportData = report.applyFilters(filteredData);
+
+        // Подсчитываем итоговую сумму по указанным колонкам
+        Double totalSum = report.calculateSums(reportData);
+
+        // Выводим название отчета и итоговую сумму в консоль
+        System.out.println(report.getName());
+        System.out.println(totalSum);
     }
 }

@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ReportSettingsFactory {
 
-    public static ReportSetting createShippingFeeReport() {
+    public static ReportSetting createSellerShippingFeeReport() {
         return new ReportSetting(
                 "Verkaufsgebühren Versand durch Verkäufer",
                 Map.of(
@@ -16,14 +16,14 @@ public class ReportSettingsFactory {
         );
     }
 
-    public static ReportSetting createExpenseReport() {
+    public static ReportSetting createAmazonShippingFeeReport() {
         return new ReportSetting(
-                "Expense Report",
+                "Verkaufsgebühren Versand durch Amazon",
                 Map.of(
-                        "Typ", List.of("Erstattung"),
-                        "Beschreibung", List.of("Beitrag")
+                        "Typ", List.of("Bestellung"),
+                        "Versand", List.of("Amazon")
                 ),
-                List.of("Andere", "Steuer auf Aktionsrabatte")
+                List.of("Verkaufsgebühren")
         );
     }
 }

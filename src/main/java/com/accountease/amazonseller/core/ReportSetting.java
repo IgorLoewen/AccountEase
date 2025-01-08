@@ -50,4 +50,17 @@ public class ReportSetting {
         SummationProcessor processor = new SummationProcessor();
         return processor.calculateTotalSum(filteredData, numericColumns);
     }
+
+    private static void processAndPrintReport(ReportSetting report, List<Map<String, String>> filteredData) {
+        // Применяем фильтры
+        List<Map<String, String>> reportData = report.applyFilters(filteredData);
+
+        // Подсчитываем сумму по новой логике
+        Double totalSum = report.calculateSums(reportData);
+
+        // Выводим результаты
+        System.out.println(report.getName());
+        System.out.println(totalSum);
+    }
+
 }
