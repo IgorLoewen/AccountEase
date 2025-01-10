@@ -105,6 +105,82 @@ public class ReportSettingsFactory {
         );
     }
 
+    public static ReportSetting getTotalStorageAndServiceFeesForAmazonFulfillment() {
+        return new ReportSetting(
+                "Lagerbestands- und Service-Gebühren für Versand durch Amazon",
+                Map.of(
+                        "Typ", List.of("Versand durch Amazon Lagergebühr"),
+                        "Beschreibung", List.of()
+                ),
+                List.of("Gesamt")
+        );
+    }
 
+    public static ReportSetting getTotalRefundsForShippingCredits() {
+        return new ReportSetting(
+                "Erstattungen für Versandkostengutschriften",
+                Map.of(
+                        "Typ", List.of("Erstattung"),
+                        "Beschreibung", List.of()
+                ),
+                List.of("Gutschrift für Versandkosten")
+        );
+    }
+
+    public static ReportSetting getTotalRefundsForPromotionalDiscounts() {
+        return new ReportSetting(
+                "Erstattungen zur Werbeaktionsrabatt",
+                Map.of(
+                        "Typ", List.of("Erstattung"),
+                        "Beschreibung", List.of()
+                ),
+                List.of("Rabatte aus Werbeaktionen")
+        );
+    }
+
+    public static ReportSetting getTotalShippingCreditNotes() {
+        return new ReportSetting(
+                "Versandkostengutschriften",
+                Map.of(
+                        "Typ", List.of("Bestellung"),
+                        "Beschreibung", List.of()
+                ),
+                List.of("Gutschrift für Versandkosten")
+        );
+    }
+
+    // Описан случай, где выбор наоборот исключает колонки с выбора. Другие все выбираются!
+    public static ReportSetting getTotalFBALogisticsInventoryCredits() {
+        return new ReportSetting(
+                "FBA Lagerbestandsguthaben",
+                Map.of(
+                        "Typ", List.of("Anpassung"),
+                        "Beschreibung", List.of("!exclude", "Versand durch Amazon Erstattung für Lagerbestand -  Allgemeine Anpassung")  // Исключающий фильтр
+                ),
+                List.of("Gesamt")
+        );
+    }
+
+    public static ReportSetting getTotalRefundsForAmazonShippedItems() {
+        return new ReportSetting(
+                "Erstattungen für durch Amazon versandte Artikel",
+                Map.of(
+                        "Typ", List.of("Erstattung"),
+                        "Beschreibung", List.of()
+                ),
+                List.of("Umsätze")
+        );
+    }
+
+    public static ReportSetting getTotalRefundsForAmazonTransactionFees() {
+        return new ReportSetting(
+                "Ersattungen zur Transaktionsgebühr - Versand durch Amazon",
+                Map.of(
+                        "Typ", List.of("Erstattung"),
+                        "Beschreibung", List.of()
+                ),
+                List.of("Gebühren zu Versand durch Amazon")
+        );
+    }
 
 }
