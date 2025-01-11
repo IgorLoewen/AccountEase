@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ReportSettingsFactory {
 
-    public static ReportSetting createSellerShippingFeeReport() {
+    public static ReportSetting getTotalSellerShippingFee() {
         return new ReportSetting(
                 "Verkaufsgebühren Versand durch Verkäufer",
                 Map.of(
@@ -16,7 +16,7 @@ public class ReportSettingsFactory {
         );
     }
 
-    public static ReportSetting createAmazonShippingFeeReport() {
+    public static ReportSetting getTotalAmazonShippingFee() {
         return new ReportSetting(
                 "Verkaufsgebühren Versand durch Amazon",
                 Map.of(
@@ -27,7 +27,7 @@ public class ReportSettingsFactory {
         );
     }
 
-    public static ReportSetting createSalesReportSeller() {
+    public static ReportSetting getTotalSalesSumSeller() {
         return new ReportSetting(
                 "Verkäufe, die durch Verkäufer selbst verschickt wurden",
                 Map.of(
@@ -38,7 +38,7 @@ public class ReportSettingsFactory {
         );
     }
 
-    public static ReportSetting createSalesReportAmazon() {
+    public static ReportSetting getTotalSalesSumAmazon() {
         return new ReportSetting(
                 "Verkäufe mit Versand durch Amazon",
                 Map.of(
@@ -49,7 +49,7 @@ public class ReportSettingsFactory {
         );
     }
 
-    public static ReportSetting createAdvertisingCostsReport() {
+    public static ReportSetting getTotalAdvertisingCosts() {
         return new ReportSetting(
                 "Werbekosten",
                 Map.of(
@@ -60,7 +60,7 @@ public class ReportSettingsFactory {
         );
     }
 
-    public static ReportSetting createAmazonFulfillmentFees() {
+    public static ReportSetting getTotalAmazonFulfillmentFees() {
         return new ReportSetting(
                 "Transaktionsgebühren Versand durch Amazon",
                 Map.of(
@@ -71,7 +71,7 @@ public class ReportSettingsFactory {
         );
     }
 
-    public static ReportSetting createPromotionalDiscountsFees() {
+    public static ReportSetting getTotalPromotionalDiscountsFees() {
         return new ReportSetting(
                 "Werbeaktionsrabatte",
                 Map.of(
@@ -82,7 +82,7 @@ public class ReportSettingsFactory {
         );
     }
 
-    public static ReportSetting createAdjustmentsFees() {
+    public static ReportSetting getTotalAdjustmentsFees() {
         return new ReportSetting(
                 "Anpassungen",
                 Map.of(
@@ -155,7 +155,7 @@ public class ReportSettingsFactory {
                 "FBA Lagerbestandsguthaben",
                 Map.of(
                         "Typ", List.of("Anpassung"),
-                        "Beschreibung", List.of("!exclude", "Versand durch Amazon Erstattung für Lagerbestand -  Allgemeine Anpassung")  // Исключающий фильтр
+                        "Beschreibung", List.of("!exclude", "Versand durch Amazon Erstattung für Lagerbestand -  Allgemeine Anpassung","Versand durch Amazon Erstattung für Lagerbestand - Kundenrücksendung")  // Исключающий фильтр
                 ),
                 List.of("Gesamt")
         );
@@ -180,6 +180,39 @@ public class ReportSettingsFactory {
                         "Beschreibung", List.of()
                 ),
                 List.of("Gebühren zu Versand durch Amazon")
+        );
+    }
+
+    public static ReportSetting getTotalRefundAmountForReturnedShipments() {
+        return new ReportSetting(
+                "Reine Rückerstattungskosten zur Verkaufsgebühr, ohne berechneten Rückerstattungsgebühren",
+                Map.of(
+                        "Typ", List.of("Erstattung"),
+                        "Beschreibung", List.of()
+                ),
+                List.of("Verkaufsgebühren")
+        );
+    }
+
+    public static ReportSetting getTotalRawRefundAmount() {
+        return new ReportSetting(
+                "Gesamtsumme der Rückerstattungen roh",
+                Map.of(
+                        "Typ", List.of("Erstattung"),
+                        "Beschreibung", List.of()
+                ),
+                List.of("Umsätze")
+        );
+    }
+
+    public static ReportSetting getTotalRawRefundAmount2() {
+        return new ReportSetting(
+                "Gesamtsumme der Rückerstattungen inkl. Rückerstattungsgebühren",
+                Map.of(
+                        "Typ", List.of("Erstattung"),
+                        "Beschreibung", List.of()
+                ),
+                List.of("Gesamt")
         );
     }
 
