@@ -13,14 +13,22 @@ public class ReportSettingsFactory {
     // Уникальные значения колонок
     private static final List<String> TYP_BESTELLUNG = List.of("Bestellung");
     private static final List<String> TYP_SERVICEGEBUEHR = List.of("Servicegebühr");
+    private static final List<String> TYP_ANPASSUNG = List.of("Anpassung");
 
     private static final List<String> VERSAND_VERKAEUFER = List.of("Verkäufer");
     private static final List<String> VERSAND_AMAZON = List.of("Amazon");
+
+    private static final List<String> BESCHREIBUNG_WERBEKOSTEN = List.of("Werbekosten");
+    private static final List<String> BESCHREIBUNG_FBA_ERSTATTUNG_LAGERBESTAND_ANPASSUNG = List.of("Versand durch Amazon Erstattung für Lagerbestand -  Allgemeine Anpassung");
 
 
     // Названия cуммарных итогов для вывода
     private static final List<String> NUMERIC_VERKAUFSGEBUEHREN = List.of("Verkaufsgebühren");
     private static final List<String> NUMERIC_UMSAETZE = List.of("Umsätze");
+    private static final List<String> NUMERIC_GESAMT = List.of("Gesamt");
+    private static final List<String> NUMERIC_GEBUEHREN_VERSAND_AMAZON = List.of("Gebühren zu Versand durch Amazon");
+    private static final List<String> NUMERIC_RABATTE_AUS_WERBEAKTIONEN = List.of("Rabatte aus Werbeaktionen");
+    private static final List<String> NUMERIC_GUTSCHRIFT_FUER_VERSANDKOSTEN = List.of("Gutschrift für Versandkosten");
 
 
     public static ReportSetting getTotalSellerShippingFee() {
@@ -72,9 +80,9 @@ public class ReportSettingsFactory {
                 "Werbekosten",
                 Map.of(
                         COLUMN_TYP, TYP_SERVICEGEBUEHR,
-                        COLUMN_BESCHREIBUNG, List.of("Werbekosten")
+                        COLUMN_BESCHREIBUNG, BESCHREIBUNG_WERBEKOSTEN
                 ),
-                List.of("Gesamt")
+                NUMERIC_GESAMT
         );
     }
 
@@ -84,7 +92,7 @@ public class ReportSettingsFactory {
                 Map.of(
                         COLUMN_TYP, TYP_BESTELLUNG
                 ),
-                List.of("Gebühren zu Versand durch Amazon")
+                NUMERIC_GEBUEHREN_VERSAND_AMAZON
         );
     }
 
@@ -94,7 +102,7 @@ public class ReportSettingsFactory {
                 Map.of(
                         COLUMN_TYP, TYP_BESTELLUNG
                 ),
-                List.of("Rabatte aus Werbeaktionen")
+                NUMERIC_RABATTE_AUS_WERBEAKTIONEN
         );
     }
 
@@ -102,10 +110,10 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Anpassungen",
                 Map.of(
-                        COLUMN_TYP, List.of("Anpassung"),
-                        COLUMN_BESCHREIBUNG, List.of("Versand durch Amazon Erstattung für Lagerbestand -  Allgemeine Anpassung")
+                        COLUMN_TYP, TYP_ANPASSUNG,
+                        COLUMN_BESCHREIBUNG, BESCHREIBUNG_FBA_ERSTATTUNG_LAGERBESTAND_ANPASSUNG
                 ),
-                List.of("Gesamt")
+                NUMERIC_GESAMT
         );
     }
 
@@ -117,7 +125,7 @@ public class ReportSettingsFactory {
                         COLUMN_TYP, TYP_SERVICEGEBUEHR,
                         COLUMN_BESCHREIBUNG, List.of("!exclude", "Werbekosten")  // Исключающий фильтр
                 ),
-                List.of("Gesamt")
+                NUMERIC_GESAMT
         );
     }
 
@@ -127,7 +135,7 @@ public class ReportSettingsFactory {
                 Map.of(
                         COLUMN_TYP, List.of("Versand durch Amazon Lagergebühr")
                 ),
-                List.of("Gesamt")
+                NUMERIC_GESAMT
         );
     }
 
@@ -137,7 +145,7 @@ public class ReportSettingsFactory {
                 Map.of(
                         COLUMN_TYP, List.of("Erstattung")
                 ),
-                List.of("Gutschrift für Versandkosten")
+                NUMERIC_GUTSCHRIFT_FUER_VERSANDKOSTEN
         );
     }
 
@@ -147,7 +155,7 @@ public class ReportSettingsFactory {
                 Map.of(
                         COLUMN_TYP, List.of("Erstattung")
                 ),
-                List.of("Rabatte aus Werbeaktionen")
+                NUMERIC_RABATTE_AUS_WERBEAKTIONEN
         );
     }
 
@@ -157,7 +165,7 @@ public class ReportSettingsFactory {
                 Map.of(
                         COLUMN_TYP, TYP_BESTELLUNG
                 ),
-                List.of("Gutschrift für Versandkosten")
+                NUMERIC_GUTSCHRIFT_FUER_VERSANDKOSTEN
         );
     }
 
@@ -166,10 +174,10 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "FBA Lagerbestandsguthaben",
                 Map.of(
-                        COLUMN_TYP, List.of("Anpassung"),
+                        COLUMN_TYP, TYP_ANPASSUNG,
                         COLUMN_BESCHREIBUNG, List.of("!exclude", "Versand durch Amazon Erstattung für Lagerbestand -  Allgemeine Anpassung", "Versand durch Amazon Erstattung für Lagerbestand - Kundenrücksendung")  // Исключающий фильтр
                 ),
-                List.of("Gesamt")
+                NUMERIC_GESAMT
         );
     }
 
@@ -189,7 +197,7 @@ public class ReportSettingsFactory {
                 Map.of(
                         COLUMN_TYP, List.of("Erstattung")
                 ),
-                List.of("Gebühren zu Versand durch Amazon")
+                NUMERIC_GEBUEHREN_VERSAND_AMAZON
         );
     }
 
