@@ -64,8 +64,7 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Transaktionsgebühren Versand durch Amazon",
                 Map.of(
-                        "Typ", List.of("Bestellung"),
-                        "Versand", List.of()
+                        "Typ", List.of("Bestellung")
                 ),
                 List.of("Gebühren zu Versand durch Amazon")
         );
@@ -75,8 +74,7 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Werbeaktionsrabatte",
                 Map.of(
-                        "Typ", List.of("Bestellung"),
-                        "Versand", List.of()
+                        "Typ", List.of("Bestellung")
                 ),
                 List.of("Rabatte aus Werbeaktionen")
         );
@@ -109,8 +107,7 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Lagerbestands- und Service-Gebühren für Versand durch Amazon",
                 Map.of(
-                        "Typ", List.of("Versand durch Amazon Lagergebühr"),
-                        "Beschreibung", List.of()
+                        "Typ", List.of("Versand durch Amazon Lagergebühr")
                 ),
                 List.of("Gesamt")
         );
@@ -120,8 +117,7 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Erstattungen für Versandkostengutschriften",
                 Map.of(
-                        "Typ", List.of("Erstattung"),
-                        "Beschreibung", List.of()
+                        "Typ", List.of("Erstattung")
                 ),
                 List.of("Gutschrift für Versandkosten")
         );
@@ -131,8 +127,7 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Erstattungen zur Werbeaktionsrabatt",
                 Map.of(
-                        "Typ", List.of("Erstattung"),
-                        "Beschreibung", List.of()
+                        "Typ", List.of("Erstattung")
                 ),
                 List.of("Rabatte aus Werbeaktionen")
         );
@@ -142,8 +137,7 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Versandkostengutschriften",
                 Map.of(
-                        "Typ", List.of("Bestellung"),
-                        "Beschreibung", List.of()
+                        "Typ", List.of("Bestellung")
                 ),
                 List.of("Gutschrift für Versandkosten")
         );
@@ -165,8 +159,7 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Erstattungen für durch Amazon versandte Artikel",
                 Map.of(
-                        "Typ", List.of("Erstattung"),
-                        "Beschreibung", List.of()
+                        "Typ", List.of("Erstattung")
                 ),
                 List.of("Umsätze")
         );
@@ -176,8 +169,7 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Ersattungen zur Transaktionsgebühr - Versand durch Amazon",
                 Map.of(
-                        "Typ", List.of("Erstattung"),
-                        "Beschreibung", List.of()
+                        "Typ", List.of("Erstattung")
                 ),
                 List.of("Gebühren zu Versand durch Amazon")
         );
@@ -187,8 +179,8 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Reine Rückerstattungskosten zur Verkaufsgebühr, ohne berechneten Rückerstattungsgebühren",
                 Map.of(
-                        "Typ", List.of("Erstattung"),
-                        "Beschreibung", List.of()
+                        "Typ", List.of("Erstattung")
+
                 ),
                 List.of("Verkaufsgebühren")
         );
