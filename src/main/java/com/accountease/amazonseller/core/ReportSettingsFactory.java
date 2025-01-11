@@ -12,22 +12,25 @@ public class ReportSettingsFactory {
 
     // Уникальные значения колонок
     private static final List<String> TYP_BESTELLUNG = List.of("Bestellung");
+    private static final List<String> TYP_SERVICEGEBUEHR = List.of("Servicegebühr");
 
     private static final List<String> VERSAND_VERKAEUFER = List.of("Verkäufer");
+    private static final List<String> VERSAND_AMAZON = List.of("Amazon");
 
 
     // Названия cуммарных итогов для вывода
     private static final List<String> NUMERIC_VERKAUFSGEBUEHREN = List.of("Verkaufsgebühren");
+    private static final List<String> NUMERIC_UMSAETZE = List.of("Umsätze");
 
 
     public static ReportSetting getTotalSellerShippingFee() {
         return new ReportSetting(
                 "Verkaufsgebühren Versand durch Verkäufer",
                 Map.of(
-                        COLUMN_TYP, List.of("Bestellung"),
-                        COLUMN_VERSAND, List.of("Verkäufer")
+                        COLUMN_TYP, TYP_BESTELLUNG,
+                        COLUMN_VERSAND, VERSAND_VERKAEUFER
                 ),
-                List.of("Verkaufsgebühren")
+                NUMERIC_VERKAUFSGEBUEHREN
         );
     }
 
@@ -35,10 +38,10 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Verkaufsgebühren Versand durch Amazon",
                 Map.of(
-                        COLUMN_TYP, List.of("Bestellung"),
-                        COLUMN_VERSAND, List.of("Amazon")
+                        COLUMN_TYP, TYP_BESTELLUNG,
+                        COLUMN_VERSAND, VERSAND_AMAZON
                 ),
-                List.of("Verkaufsgebühren")
+                NUMERIC_VERKAUFSGEBUEHREN
         );
     }
 
@@ -46,10 +49,10 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Verkäufe, die durch Verkäufer selbst verschickt wurden",
                 Map.of(
-                        COLUMN_TYP, List.of("Bestellung"),
-                        COLUMN_VERSAND, List.of("Verkäufer")
+                        COLUMN_TYP, TYP_BESTELLUNG,
+                        COLUMN_VERSAND, VERSAND_VERKAEUFER
                 ),
-                List.of("Umsätze")
+                NUMERIC_UMSAETZE
         );
     }
 
@@ -57,10 +60,10 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Verkäufe mit Versand durch Amazon",
                 Map.of(
-                        COLUMN_TYP, List.of("Bestellung"),
-                        COLUMN_VERSAND, List.of("Amazon")
+                        COLUMN_TYP, TYP_BESTELLUNG,
+                        COLUMN_VERSAND, VERSAND_AMAZON
                 ),
-                List.of("Umsätze")
+                NUMERIC_UMSAETZE
         );
     }
 
@@ -68,8 +71,8 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Werbekosten",
                 Map.of(
-                        COLUMN_TYP, List.of("Servicegebühr"),
-                        "Beschreibung", List.of("Werbekosten")
+                        COLUMN_TYP, TYP_SERVICEGEBUEHR,
+                        COLUMN_BESCHREIBUNG, List.of("Werbekosten")
                 ),
                 List.of("Gesamt")
         );
@@ -79,7 +82,7 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Transaktionsgebühren Versand durch Amazon",
                 Map.of(
-                        COLUMN_TYP, List.of("Bestellung")
+                        COLUMN_TYP, TYP_BESTELLUNG
                 ),
                 List.of("Gebühren zu Versand durch Amazon")
         );
@@ -89,7 +92,7 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Werbeaktionsrabatte",
                 Map.of(
-                        COLUMN_TYP, List.of("Bestellung")
+                        COLUMN_TYP, TYP_BESTELLUNG
                 ),
                 List.of("Rabatte aus Werbeaktionen")
         );
@@ -100,19 +103,19 @@ public class ReportSettingsFactory {
                 "Anpassungen",
                 Map.of(
                         COLUMN_TYP, List.of("Anpassung"),
-                        "Beschreibung", List.of("Versand durch Amazon Erstattung für Lagerbestand -  Allgemeine Anpassung")
+                        COLUMN_BESCHREIBUNG, List.of("Versand durch Amazon Erstattung für Lagerbestand -  Allgemeine Anpassung")
                 ),
                 List.of("Gesamt")
         );
     }
 
-       // Описан случай, где выбор наоборот исключает колонки с выбора. Другие все выбираются!
+    // Описан случай, где выбор наоборот исключает колонки с выбора. Другие все выбираются!
     public static ReportSetting getTotalServiceFees() {
         return new ReportSetting(
                 "Servicegebühren",
                 Map.of(
-                        COLUMN_TYP, List.of("Servicegebühr"),
-                        "Beschreibung", List.of("!exclude", "Werbekosten")  // Исключающий фильтр
+                        COLUMN_TYP, TYP_SERVICEGEBUEHR,
+                        COLUMN_BESCHREIBUNG, List.of("!exclude", "Werbekosten")  // Исключающий фильтр
                 ),
                 List.of("Gesamt")
         );
@@ -152,7 +155,7 @@ public class ReportSettingsFactory {
         return new ReportSetting(
                 "Versandkostengutschriften",
                 Map.of(
-                        COLUMN_TYP, List.of("Bestellung")
+                        COLUMN_TYP, TYP_BESTELLUNG
                 ),
                 List.of("Gutschrift für Versandkosten")
         );
@@ -164,7 +167,7 @@ public class ReportSettingsFactory {
                 "FBA Lagerbestandsguthaben",
                 Map.of(
                         COLUMN_TYP, List.of("Anpassung"),
-                        "Beschreibung", List.of("!exclude", "Versand durch Amazon Erstattung für Lagerbestand -  Allgemeine Anpassung","Versand durch Amazon Erstattung für Lagerbestand - Kundenrücksendung")  // Исключающий фильтр
+                        COLUMN_BESCHREIBUNG, List.of("!exclude", "Versand durch Amazon Erstattung für Lagerbestand -  Allgemeine Anpassung", "Versand durch Amazon Erstattung für Lagerbestand - Kundenrücksendung")  // Исключающий фильтр
                 ),
                 List.of("Gesamt")
         );
@@ -176,7 +179,7 @@ public class ReportSettingsFactory {
                 Map.of(
                         COLUMN_TYP, List.of("Erstattung")
                 ),
-                List.of("Umsätze")
+                NUMERIC_UMSAETZE
         );
     }
 
@@ -197,7 +200,7 @@ public class ReportSettingsFactory {
                         COLUMN_TYP, List.of("Erstattung")
 
                 ),
-                List.of("Verkaufsgebühren")
+                NUMERIC_VERKAUFSGEBUEHREN
         );
     }
 
