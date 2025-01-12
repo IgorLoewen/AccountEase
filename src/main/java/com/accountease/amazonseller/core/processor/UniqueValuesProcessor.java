@@ -29,7 +29,7 @@ public class UniqueValuesProcessor {
 }
 
 /// пример вызова уникальных значений для значения в колонке 'Typ' - вместо Typ можно другие названия подставлять
-
+//
 //            // Уникальные значения для колонки "Type"
 //            UniqueValuesProcessor uniqueValuesProcessor = new UniqueValuesProcessor();
 //            List<String> uniqueValues = uniqueValuesProcessor.getUniqueValues(filteredData, "Typ");

@@ -3,12 +3,13 @@ package com.accountease.amazonseller.core;
 import java.util.List;
 import java.util.Map;
 
-public class ReportSettingsFactory {
+public class ReportFilterSettings {
 
     // Названия колонок
     private static final String COLUMN_TYP = "Typ";
     private static final String COLUMN_VERSAND = "Versand";
     private static final String COLUMN_BESCHREIBUNG = "Beschreibung";
+    private static final String COLUMN_BESTELLUNG = "Bestellung";
 
     // Уникальные значения колонок
     private static final List<String> TYP_BESTELLUNG = List.of("Bestellung");
@@ -34,6 +35,8 @@ public class ReportSettingsFactory {
     private static final List<String> NUMERIC_GEBUEHREN_VERSAND_AMAZON = List.of("Gebühren zu Versand durch Amazon");
     private static final List<String> NUMERIC_RABATTE_AUS_WERBEAKTIONEN = List.of("Rabatte aus Werbeaktionen");
     private static final List<String> NUMERIC_GUTSCHRIFT_FUER_VERSANDKOSTEN = List.of("Gutschrift für Versandkosten");
+
+    private static final List<String> UNIQUE_LIST_BESTELLNUMMER = List.of("Bestellnummer");
 
 
     public static ReportSetting getTotalSellerShippingFee() {
@@ -216,6 +219,31 @@ public class ReportSettingsFactory {
                 NUMERIC_VERKAUFSGEBUEHREN
         );
     }
+
+    public static ReportSetting getUniqueValuesFromFilteredColumn() {
+        return new ReportSetting(
+                "Reine Rückerstattungskosten zur Verkaufsgebühr, ohne berechneten Rückerstattungsgebühren",
+                Map.of(
+                        COLUMN_TYP, TYP_ERSTATTUNG
+
+                ),
+
+                UNIQUE_LIST_BESTELLNUMMER
+        );
+    }
+
+    //Tests
+    public static ReportSetting getTotalRefundAmountForReturnedShipments2() {
+        return new ReportSetting(
+                "TestIT",
+                Map.of(
+                        COLUMN_BESTELLUNG,List.of("028-0001650-0973127")
+
+                ),
+                NUMERIC_VERKAUFSGEBUEHREN
+        );
+    }
+
 
 
 }

@@ -3,6 +3,7 @@ package com.accountease.amazonseller.core;
 import com.accountease.amazonseller.core.processor.DateFilter;
 import com.accountease.amazonseller.core.processor.MultiColumnFilter;
 import com.accountease.amazonseller.core.processor.SummationProcessor;
+import com.accountease.amazonseller.core.processor.UniqueValuesProcessor;
 import com.accountease.amazonseller.core.reader.ExcelReader;
 
 import java.text.SimpleDateFormat;
@@ -59,4 +60,56 @@ public class ReportSetting {
             throw new RuntimeException("Ошибка обработки отчёта: " + e.getMessage(), e);
         }
     }
+
+
+    /**
+     * Возвращает последнюю колонку из списка numericColumns.
+     *
+     * Используется для автоматического определения колонки, по которой нужно извлекать уникальные значения.
+     * Список numericColumns задается при создании объекта ReportSetting.
+     *
+     * @return Последняя колонка из numericColumns.
+     * @throws IllegalStateException Если список numericColumns пуст или не инициализирован.
+     */
+    public String getLastNumericColumn() {
+        if (numericColumns == null || numericColumns.isEmpty()) {
+            throw new IllegalStateException("Список numericColumns пуст.");
+        }
+        // Возвращаем последнюю колонку
+        return numericColumns.get(numericColumns.size() - 1);
+    }
+
+    /**
+     * Извлекает уникальные значения из последней колонки, указанной в numericColumns.
+     *
+     * 1. Сначала метод определяет последнюю колонку из списка numericColumns с помощью getLastNumericColumn.
+     * 2. Затем применяет фильтры, указанные в columnFilters, к данным (data).
+     * 3. После фильтрации извлекает уникальные значения из выбранной колонки.
+     *
+     * Пример использования:
+     * List<String> uniqueValues = reportSetting.extractUniqueValuesFromLastNumericColumn();
+     *
+     * @return Список уникальных значений из последней колонки numericColumns.
+     * @throws RuntimeException Если произошла ошибка во время фильтрации данных или извлечения уникальных значений.
+     */
+    public List<String> extractUniqueValuesFromLastNumericColumn() {
+        try {
+            // Шаг 1: Получаем последнюю колонку из numericColumns
+            String lastNumericColumn = getLastNumericColumn();
+
+            // Шаг 2: Применяем фильтры из columnFilters к данным
+            MultiColumnFilter filter = new MultiColumnFilter();
+            List<Map<String, String>> filteredData = filter.filterByColumns(columnFilters, data);
+
+            // Шаг 3: Извлекаем уникальные значения из последней numericColumns
+            UniqueValuesProcessor uniqueValuesProcessor = new UniqueValuesProcessor();
+            return uniqueValuesProcessor.getUniqueValues(filteredData, lastNumericColumn);
+        } catch (Exception e) {
+            throw new RuntimeException("Ошибка при извлечении уникальных значений: " + e.getMessage(), e);
+        }
+    }
+
+
+
+
 }
