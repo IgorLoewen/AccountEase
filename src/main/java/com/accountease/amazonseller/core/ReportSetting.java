@@ -21,6 +21,7 @@ public class ReportSetting {
     private static final String startDate = "01.07.2024 00:00:00";
     private static final String endDate = "31.12.2024 23:59:59";
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+    private static final String DateColumnExel = "Datum/Uhrzeit";
 
     // Считываем данные из Excel (статическое поле)
     private static final List<Map<String, String>> data = initData();
@@ -47,7 +48,7 @@ public class ReportSetting {
     public Double processReport() {
         try {
             // Фильтрация данных
-            DateFilter dateFilter = new DateFilter("Datum/Uhrzeit", startDate, endDate, dateFormat);
+            DateFilter dateFilter = new DateFilter(DateColumnExel, startDate, endDate, dateFormat);
             List<Map<String, String>> dateFilteredData = dateFilter.filter(data);
 
             MultiColumnFilter filter = new MultiColumnFilter();
