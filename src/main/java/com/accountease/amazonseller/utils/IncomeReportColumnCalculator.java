@@ -31,7 +31,7 @@ public class IncomeReportColumnCalculator {
             processAndPrintReport(ReportFilterSettings.getTotalRefundsForAmazonTransactionFees());
             processAndPrintReport(ReportFilterSettings.getTotalRefundAmountForReturnedShipments());
 
-            // Тестируем уникальные значения для последней колонки NUMERIC_VERKAUFSGEBUEHREN
+            // Тестируем уникальные значения для последней колонки
             UniqueValuesProcessor uniqueValuesProcessor = new UniqueValuesProcessor();
             ReportSetting report = ReportFilterSettings.getUniqueValuesFromFilteredColumn();
 
