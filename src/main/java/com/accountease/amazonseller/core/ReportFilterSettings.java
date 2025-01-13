@@ -228,7 +228,7 @@ public class ReportFilterSettings {
 
                 ),
 
-                UNIQUE_LIST_BESTELLNUMMER
+                NUMERIC_VERKAUFSGEBUEHREN
         );
     }
 

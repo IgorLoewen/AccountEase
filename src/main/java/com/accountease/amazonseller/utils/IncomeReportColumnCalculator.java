@@ -2,8 +2,11 @@ package com.accountease.amazonseller.utils;
 
 import com.accountease.amazonseller.core.ReportFilterSettings;
 import com.accountease.amazonseller.core.ReportSetting;
+import com.accountease.amazonseller.core.processor.UniqueValuesProcessor;
+import com.accountease.amazonseller.core.processor.MultiColumnFilter;
 
 import java.util.List;
+import java.util.Map;
 
 public class IncomeReportColumnCalculator {
 
@@ -28,10 +31,20 @@ public class IncomeReportColumnCalculator {
             processAndPrintReport(ReportFilterSettings.getTotalRefundsForAmazonTransactionFees());
             processAndPrintReport(ReportFilterSettings.getTotalRefundAmountForReturnedShipments());
 
-
             // Тестируем уникальные значения для последней колонки NUMERIC_VERKAUFSGEBUEHREN
-            getUniqueValuesFromReportFilterSettings(ReportFilterSettings.getUniqueValuesFromFilteredColumn());
+            UniqueValuesProcessor uniqueValuesProcessor = new UniqueValuesProcessor();
+            ReportSetting report = ReportFilterSettings.getUniqueValuesFromFilteredColumn();
 
+            // Извлекаем уникальные значения из последней числовой колонки
+            List<String> uniqueValues = uniqueValuesProcessor.extractUniqueValuesFromLastNumericColumn(
+                    ReportSetting.getData(),
+                    report.getNumericColumns(),
+                    report.getColumnFilters()
+            );
+
+            // Выводим уникальные значения
+            System.out.println(report.getName());
+            System.out.println("Уникальные значения: " + String.join(", ", uniqueValues));
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -44,18 +57,5 @@ public class IncomeReportColumnCalculator {
         // Вывод результата
         System.out.println(report.getName());
         System.out.println(totalSum);
-    }
-
-    private static void getUniqueValuesFromReportFilterSettings(ReportSetting report) {
-        try {
-            // Извлекаем уникальные значения из последней колонки NUMERIC_VERKAUFSGEBUEHREN
-            List<String> uniqueValues = report.extractUniqueValuesFromLastNumericColumn();
-
-            // Тестовый вывод
-            System.out.println(report.getName());
-            System.out.println("Уникальные значения: " + String.join(", ", uniqueValues));
-        } catch (Exception e) {
-            System.err.println("Ошибка в testUniqueValues: " + e.getMessage());
-        }
     }
 }

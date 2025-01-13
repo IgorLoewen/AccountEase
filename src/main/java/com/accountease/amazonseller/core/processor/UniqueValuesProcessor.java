@@ -4,6 +4,8 @@ import java.util.*;
 
 /**
  * This class processes a list of rows to extract unique values from a specified column.
+ * Additionally, it provides methods to determine the last numeric column and
+ * extract unique values from that column after applying filters.
  */
 public class UniqueValuesProcessor {
 
@@ -26,14 +28,43 @@ public class UniqueValuesProcessor {
 
         return new ArrayList<>(uniqueValues);
     }
-}
 
-/// пример вызова уникальных значений для значения в колонке 'Typ' - вместо Typ можно другие названия подставлять
-//
-//            // Уникальные значения для колонки "Type"
-//            UniqueValuesProcessor uniqueValuesProcessor = new UniqueValuesProcessor();
-//            List<String> uniqueValues = uniqueValuesProcessor.getUniqueValues(filteredData, "Typ");
-//
-//            // Выводим уникальные значения
-//            System.out.println("Уникальные значения в колонке 'Typ':");
-//            uniqueValues.forEach(System.out::println);
+    /**
+     * Determines the last numeric column from the provided list of numeric columns.
+     *
+     * @param numericColumns The list of numeric column names.
+     * @return The name of the last numeric column.
+     * @throws IllegalStateException If the list of numeric columns is null or empty.
+     */
+    public String getLastNumericColumnName(List<String> numericColumns) {
+        if (numericColumns == null || numericColumns.isEmpty()) {
+            throw new IllegalStateException("The list of numeric columns is empty or null.");
+        }
+        return numericColumns.get(numericColumns.size() - 1);
+    }
+
+    /**
+     * Extracts unique values from the last numeric column in the data after applying column filters.
+     *
+     * @param data          The list of rows (each row is a map of column names to values).
+     * @param numericColumns The list of numeric column names.
+     * @param columnFilters  A map of column filters to apply to the data.
+     * @return A list of unique values from the last numeric column.
+     * @throws RuntimeException If an error occurs during filtering or value extraction.
+     */
+    public List<String> extractUniqueValuesFromLastNumericColumn(List<Map<String, String>> data, List<String> numericColumns, Map<String, List<String>> columnFilters) {
+        try {
+            // Determine the last numeric column name
+            String lastNumericColumnName = getLastNumericColumnName(numericColumns);
+
+            // Apply filters to the data
+            MultiColumnFilter filter = new MultiColumnFilter();
+            List<Map<String, String>> filteredData = filter.filterByColumns(columnFilters, data);
+
+            // Extract unique values from the filtered data
+            return getUniqueValues(filteredData, lastNumericColumnName);
+        } catch (Exception e) {
+            throw new RuntimeException("Error extracting unique values from the last numeric column: " + e.getMessage(), e);
+        }
+    }
+}
