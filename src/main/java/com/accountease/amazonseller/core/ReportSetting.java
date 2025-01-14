@@ -26,7 +26,7 @@ public class ReportSetting {
     // Считываем данные из Excel (статическое поле)
     private static final List<Map<String, String>> data = initData();
 
-    public ReportSetting(String name, Map<String, List<String>> columnFilters, List<String> numericColumns) {
+    public ReportSetting(String name, Map<String,List<String>> columnFilters, List<String> numericColumns) {
         this.name = name;
         this.columnFilters = columnFilters;
         this.numericColumns = numericColumns;

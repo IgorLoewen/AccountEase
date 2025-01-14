@@ -9,7 +9,7 @@ public class ReportFilterSettings {
     private static final String COLUMN_TYP = "Typ";
     private static final String COLUMN_VERSAND = "Versand";
     private static final String COLUMN_BESCHREIBUNG = "Beschreibung";
-    private static final String COLUMN_BESTELLUNG = "Bestellung";
+    private static final String COLUMN_BESTELLNUMMER = "Bestellnummer";
 
     // Уникальные значения колонок
     private static final List<String> TYP_BESTELLUNG = List.of("Bestellung");
@@ -35,6 +35,9 @@ public class ReportFilterSettings {
     private static final List<String> NUMERIC_GEBUEHREN_VERSAND_AMAZON = List.of("Gebühren zu Versand durch Amazon");
     private static final List<String> NUMERIC_RABATTE_AUS_WERBEAKTIONEN = List.of("Rabatte aus Werbeaktionen");
     private static final List<String> NUMERIC_GUTSCHRIFT_FUER_VERSANDKOSTEN = List.of("Gutschrift für Versandkosten");
+
+    // Параметры для вывода уникальных значений из колонки
+    private static final List<String> UNIQUE_BESTELLNUMMER = List.of("Bestellnummer");
 
     private static final List<String> UNIQUE_LIST_BESTELLNUMMER = List.of("Bestellnummer");
 
@@ -228,7 +231,7 @@ public class ReportFilterSettings {
 
                 ),
 
-                NUMERIC_VERKAUFSGEBUEHREN
+                UNIQUE_LIST_BESTELLNUMMER
         );
     }
 
@@ -238,7 +241,7 @@ public class ReportFilterSettings {
         return new ReportSetting(
                 "TestIT",
                 Map.of(
-                        COLUMN_BESTELLUNG, uniqueValues // Передаём уникальный список сюда
+                        COLUMN_BESTELLNUMMER, uniqueValues // Передаём уникальный список сюда
                 ),
                 NUMERIC_VERKAUFSGEBUEHREN
         );

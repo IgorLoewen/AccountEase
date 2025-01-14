@@ -11,6 +11,12 @@ import java.util.Map;
 public class IncomeReportColumnCalculator {
 
     public static void main(String[] args) {
+
+        // Тестируем уникальные значения для последней колонки
+        UniqueValuesProcessor uniqueValuesProcessor = new UniqueValuesProcessor();
+        ReportSetting report = ReportFilterSettings.getUniqueValuesFromFilteredColumn();
+
+
         try {
             // Вызываем обработку отчётов напрямую
             processAndPrintReport(ReportFilterSettings.getTotalSellerShippingFee());
@@ -31,20 +37,21 @@ public class IncomeReportColumnCalculator {
             processAndPrintReport(ReportFilterSettings.getTotalRefundsForAmazonTransactionFees());
             processAndPrintReport(ReportFilterSettings.getTotalRefundAmountForReturnedShipments());
 
-            // Тестируем уникальные значения для последней колонки
-            UniqueValuesProcessor uniqueValuesProcessor = new UniqueValuesProcessor();
-            ReportSetting report = ReportFilterSettings.getUniqueValuesFromFilteredColumn();
+
+
+
+
 
             // Извлекаем уникальные значения из последней числовой колонки
+            // Создаём новый ReportSetting на основе уникальных значений
             List<String> uniqueValues = uniqueValuesProcessor.extractUniqueValuesFromLastNumericColumn(
                     ReportSetting.getData(),
                     report.getNumericColumns(),
                     report.getColumnFilters()
             );
 
-            // Выводим уникальные значения
-            System.out.println(report.getName());
-            System.out.println("Уникальные значения: " + String.join(", ", uniqueValues));
+            processAndPrintReport(ReportFilterSettings.buildFilterFromUniqueColumnValues(uniqueValues));
+
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
