@@ -1,50 +1,45 @@
 package com.accountease.amazonseller.utils;
 
-import com.accountease.amazonseller.core.ReportFilterSettings;
+import com.accountease.amazonseller.core.filters.ExclusionFilters;
+import com.accountease.amazonseller.core.filters.StandartFilters;
+import com.accountease.amazonseller.core.filters.ValueListFilters;
 import com.accountease.amazonseller.core.ReportSetting;
-import com.accountease.amazonseller.core.processor.UniqueValuesProcessor;
-import com.accountease.amazonseller.core.processor.MultiColumnFilter;
 
-import java.util.List;
-import java.util.Map;
+import java.util.Collections;
 
 public class IncomeReportColumnCalculator {
 
     public static void main(String[] args) {
+
         try {
             // Вызываем обработку отчётов напрямую
-            processAndPrintReport(ReportFilterSettings.getTotalSellerShippingFee());
-            processAndPrintReport(ReportFilterSettings.getTotalAmazonShippingFee());
-            processAndPrintReport(ReportFilterSettings.getTotalSalesSumSeller());
-            processAndPrintReport(ReportFilterSettings.getTotalSalesSumAmazon());
-            processAndPrintReport(ReportFilterSettings.getTotalAdvertisingCosts());
-            processAndPrintReport(ReportFilterSettings.getTotalAmazonFulfillmentFees());
-            processAndPrintReport(ReportFilterSettings.getTotalPromotionalDiscountsFees());
-            processAndPrintReport(ReportFilterSettings.getTotalAdjustmentsFees());
-            processAndPrintReport(ReportFilterSettings.getTotalServiceFees());
-            processAndPrintReport(ReportFilterSettings.getTotalStorageAndServiceFeesForAmazonFulfillment());
-            processAndPrintReport(ReportFilterSettings.getTotalRefundsForShippingCredits());
-            processAndPrintReport(ReportFilterSettings.getTotalRefundsForPromotionalDiscounts());
-            processAndPrintReport(ReportFilterSettings.getTotalShippingCreditNotes());
-            processAndPrintReport(ReportFilterSettings.getTotalFBALogisticsInventoryCredits());
-            processAndPrintReport(ReportFilterSettings.getTotalRefundsForAmazonShippedItems());
-            processAndPrintReport(ReportFilterSettings.getTotalRefundsForAmazonTransactionFees());
-            processAndPrintReport(ReportFilterSettings.getTotalRefundAmountForReturnedShipments());
+            processAndPrintReport(StandartFilters.getTotalSellerShippingFee());
+            processAndPrintReport(StandartFilters.getTotalAmazonShippingFee());
+            processAndPrintReport(StandartFilters.getTotalSalesSumSeller());
+            processAndPrintReport(StandartFilters.getTotalSalesSumAmazon());
+            processAndPrintReport(StandartFilters.getTotalAdvertisingCosts());
+            processAndPrintReport(StandartFilters.getTotalAmazonFulfillmentFees());
+            processAndPrintReport(StandartFilters.getTotalPromotionalDiscountsFees());
+            processAndPrintReport(StandartFilters.getTotalAdjustmentsFees());
+            processAndPrintReport(ExclusionFilters.getTotalServiceFees());
+            processAndPrintReport(StandartFilters.getTotalStorageAndServiceFeesForAmazonFulfillment());
+            processAndPrintReport(StandartFilters.getTotalRefundsForShippingCredits());
+            processAndPrintReport(StandartFilters.getTotalRefundsForPromotionalDiscounts());
+            processAndPrintReport(StandartFilters.getTotalShippingCreditNotes());
+            processAndPrintReport(ExclusionFilters.getTotalFBALogisticsInventoryCredits());
+            processAndPrintReport(StandartFilters.getTotalRefundsForAmazonShippedItems());
+            processAndPrintReport(StandartFilters.getTotalRefundsForAmazonTransactionFees());
+            processAndPrintReport(StandartFilters.getTotalRefundAmountForReturnedShipments());
 
-            // Тестируем уникальные значения для последней колонки
-            UniqueValuesProcessor uniqueValuesProcessor = new UniqueValuesProcessor();
-            ReportSetting report = ReportFilterSettings.getUniqueValuesFromFilteredColumn();
-
-            // Извлекаем уникальные значения из последней числовой колонки
-            List<String> uniqueValues = uniqueValuesProcessor.extractUniqueValuesFromLastNumericColumn(
-                    ReportSetting.getData(),
-                    report.getNumericColumns(),
-                    report.getColumnFilters()
+            // Делаем финальный отчёт через метод
+            ReportSetting finalReport = ReportProcessingTools.processAndFilterWithUniqueValues(
+                    ValueListFilters.getUniqueValuesFromFilteredColumn(),
+                    ValueListFilters.buildFilterFromUniqueColumnValues(Collections.emptyList())
             );
 
-            // Выводим уникальные значения
-            System.out.println(report.getName());
-            System.out.println("Уникальные значения: " + String.join(", ", uniqueValues));
+            // Обрабатываем отчёт
+            processAndPrintReport(finalReport);
+
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
