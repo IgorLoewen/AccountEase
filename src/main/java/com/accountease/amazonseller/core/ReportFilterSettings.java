@@ -1,5 +1,7 @@
 package com.accountease.amazonseller.core;
 
+import com.accountease.amazonseller.core.processor.UniqueValuesProcessor;
+
 import java.util.List;
 import java.util.Map;
 
@@ -247,6 +249,22 @@ public class ReportFilterSettings {
         );
     }
 
+    public static ReportSetting createFilteredReportFromAnother(ReportSetting firstReport, ReportSetting templateReport) {
+        // Извлекаем уникальные значения из первого объекта
+        UniqueValuesProcessor processor = new UniqueValuesProcessor();
+        List<String> uniqueValues = processor.extractUniqueValuesFromLastNumericColumn(
+                ReportSetting.getData(),
+                firstReport.getNumericColumns(),
+                firstReport.getColumnFilters()
+        );
+
+        // Возвращаем новый объект, модифицируя второй шаблон
+        return new ReportSetting(
+                templateReport.getName(), // Имя берём из второго объекта (шаблона)
+                Map.of(templateReport.getColumnFilters().keySet().iterator().next(), uniqueValues), // Применяем уникальные значения
+                templateReport.getNumericColumns()
+        );
+    }
 
 
 
