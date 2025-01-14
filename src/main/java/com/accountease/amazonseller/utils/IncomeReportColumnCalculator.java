@@ -31,12 +31,11 @@ public class IncomeReportColumnCalculator {
             processAndPrintReport(StandartFilters.getTotalRefundsForAmazonTransactionFees());
             processAndPrintReport(StandartFilters.getTotalRefundAmountForReturnedShipments());
 
-            // Делаем исходный репорт с начальной фильтрацией
-            ReportSetting firstReport = ValueListFilters.getUniqueValuesFromFilteredColumn();
-            // Потом делаем фильтр, куда будет передаваться первая фильтрация
-            ReportSetting templateReport = ValueListFilters.buildFilterFromUniqueColumnValues(Collections.emptyList());
-            // Фильтруем уже по уникальным значениям по двум объектам выше
-            ReportSetting finalReport = ReportProcessorUtils.createFilteredReportFromAnother(firstReport, templateReport);
+            // Делаем финальный отчёт через метод
+            ReportSetting finalReport = ReportProcessingTools.processAndFilterWithUniqueValues(
+                    ValueListFilters.getUniqueValuesFromFilteredColumn(),
+                    ValueListFilters.buildFilterFromUniqueColumnValues(Collections.emptyList())
+            );
 
             // Обрабатываем отчёт
             processAndPrintReport(finalReport);

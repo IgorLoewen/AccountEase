@@ -11,7 +11,7 @@ import java.util.Map;
  * This class provides methods to create new filtered ReportSetting objects
  * based on unique values extracted from other reports.
  */
-public class ReportProcessorUtils {
+public class ReportProcessingTools {
 
     /**
      * Creates a new ReportSetting object by applying a list of unique values to a specific column filter.
@@ -35,17 +35,16 @@ public class ReportProcessorUtils {
     }
 
     /**
-     * Creates a new ReportSetting object by extracting unique values from the last numeric column
-     * of a given report and applying them as a filter to another report.
+     * Обрабатывает два отчёта, извлекает уникальные значения из первого и применяет их к шаблонному отчёту.
      *
-     * @param firstReport   The source report from which unique values are extracted.
-     * @param templateReport The template report to which the unique values are applied.
-     * @return A new ReportSetting object with the applied unique value filter.
+     * @param firstReport    Исходный отчёт, из которого извлекаются уникальные значения.
+     * @param templateReport Шаблонный отчёт, к которому применяются уникальные значения.
+     * @return Новый ReportSetting с применённой фильтрацией.
      */
-    public static ReportSetting createFilteredReportFromAnother(
+    public static ReportSetting processAndFilterWithUniqueValues(
             ReportSetting firstReport,
             ReportSetting templateReport) {
-        // Extract unique values from the first report
+        // Извлекаем уникальные значения из первого отчёта
         UniqueValuesProcessor processor = new UniqueValuesProcessor();
         List<String> uniqueValues = processor.extractUniqueValuesFromLastNumericColumn(
                 ReportSetting.getData(),
@@ -53,7 +52,7 @@ public class ReportProcessorUtils {
                 firstReport.getColumnFilters()
         );
 
-        // Apply the unique values to the template report
+        // Создаём новый отчёт с применённой фильтрацией
         return new ReportSetting(
                 templateReport.getName(),
                 Map.of(
@@ -62,4 +61,5 @@ public class ReportProcessorUtils {
                 templateReport.getNumericColumns()
         );
     }
+
 }

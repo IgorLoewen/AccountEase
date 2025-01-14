@@ -1,9 +1,9 @@
 package com.accountease.amazonseller.core;
 
+import com.accountease.amazonseller.core.constants.FilterConstants;
 import com.accountease.amazonseller.core.processor.DateFilter;
 import com.accountease.amazonseller.core.processor.MultiColumnFilter;
 import com.accountease.amazonseller.core.processor.SummationProcessor;
-import com.accountease.amazonseller.core.processor.UniqueValuesProcessor;
 import com.accountease.amazonseller.core.reader.ExcelReader;
 
 import java.text.SimpleDateFormat;
@@ -14,14 +14,6 @@ public class ReportSetting {
     private final String name; // Название отчёта
     private final Map<String, List<String>> columnFilters; // Фильтры по колонкам
     private final List<String> numericColumns; // Колонки для подсчёта
-
-    // Глобальные параметры
-    private static final String filePath = "/Users/GiorUg/Desktop/Desktop PC bis 2023/2024CompleteReportTransaktions.xlsx";
-    private static final int headerRowIndex = 7; // Строка заголовков
-    private static final String startDate = "01.07.2024 00:00:00";
-    private static final String endDate = "31.12.2024 23:59:59";
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-    private static final String DateColumnExel = "Datum/Uhrzeit";
 
     // Считываем данные из Excel (статическое поле)
     private static final List<Map<String, String>> data = initData();
@@ -35,7 +27,7 @@ public class ReportSetting {
     // Метод инициализации data
     private static List<Map<String, String>> initData() {
         try {
-            return ExcelReader.readExcel(filePath, headerRowIndex);
+            return ExcelReader.readExcel(FilterConstants.FILE_PATH, FilterConstants.HEADER_ROW_INDEX);
         } catch (IOException e) {
             throw new RuntimeException("Ошибка при чтении Excel-файла: " + e.getMessage(), e);
         }
@@ -60,7 +52,12 @@ public class ReportSetting {
     public Double processReport() {
         try {
             // Фильтрация данных
-            DateFilter dateFilter = new DateFilter(DateColumnExel, startDate, endDate, dateFormat);
+            DateFilter dateFilter = new DateFilter(
+                    FilterConstants.DATE_COLUMN_EXCEL,
+                    FilterConstants.START_DATE,
+                    FilterConstants.END_DATE,
+                    FilterConstants.DATE_FORMAT
+            );
             List<Map<String, String>> dateFilteredData = dateFilter.filter(data);
 
             MultiColumnFilter filter = new MultiColumnFilter();

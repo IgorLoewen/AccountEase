@@ -1,5 +1,6 @@
-package com.accountease.amazonseller.utils;
+package com.accountease.amazonseller.core.constants;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -11,6 +12,21 @@ import java.util.List;
  * - Помогает централизованно управлять всеми параметрами, избегая дублирования.
  */
 public class FilterConstants {
+
+    // Параметры Excel
+    public static final String FILE_PATH = "/Users/GiorUg/Desktop/Desktop PC bis 2023/2024CompleteReportTransaktions.xlsx";
+    public static final int HEADER_ROW_INDEX = 7; // Строка заголовков
+
+    // Даты для фильтрации
+    public static final String START_DATE = "01.07.2024 00:00:00";
+    public static final String END_DATE = "31.12.2024 23:59:59";
+
+    // Формат даты
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+
+    // Колонка для даты в Excel
+    public static final String DATE_COLUMN_EXCEL = "Datum/Uhrzeit";
+
 
     // Названия колонок
     public static final String COLUMN_TYP = "Typ";

@@ -1,7 +1,7 @@
 package com.accountease.amazonseller.core.filters;
 
 import com.accountease.amazonseller.core.ReportSetting;
-import com.accountease.amazonseller.utils.FilterConstants;
+import com.accountease.amazonseller.core.constants.FilterConstants;
 
 import java.util.Map;
 

@@ -1,7 +1,7 @@
 package com.accountease.amazonseller.core.filters;
 
 import com.accountease.amazonseller.core.ReportSetting;
-import com.accountease.amazonseller.utils.FilterConstants;
+import com.accountease.amazonseller.core.constants.FilterConstants;
 
 import java.util.List;
 import java.util.Map;
@@ -36,15 +36,4 @@ public class ValueListFilters {
         );
     }
 
-    public static ReportSetting createFilteredReportFromAnother(ReportSetting firstReport, ReportSetting templateReport) {
-        return new ReportSetting(
-                templateReport.getName(),
-                Map.of(templateReport.getColumnFilters().keySet().iterator().next(),
-                        firstReport.getColumnFilters().getOrDefault(
-                                firstReport.getColumnFilters().keySet().iterator().next(), List.of()
-                        )
-                ),
-                templateReport.getNumericColumns()
-        );
-    }
 }
