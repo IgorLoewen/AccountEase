@@ -43,7 +43,37 @@ public class ReportFilterSettings {
 
     private static final List<String> UNIQUE_LIST_BESTELLNUMMER = List.of("Bestellnummer");
 
-
+    /**
+     * Фильтры для стандартной обработки данных.
+     *
+     * Эти методы создают объекты ReportSetting, предназначенные для выполнения стандартной
+     * фильтрации данных с учётом заранее заданных параметров. Такие фильтры применяются для
+     * подсчёта итогов, анализа и построения отчётов на основе различных категорий данных.
+     *
+     * Основная задача:
+     * - Фильтрация данных по указанным критериям. Например:
+     *   1. Фильтрация заказов по типу доставки (продажи, отправленные продавцом или Amazon).
+     *   2. Анализ расходов (затраты на рекламу, комиссии за обработку).
+     *   3. Учёт возвратов и компенсаций.
+     *
+     * Применение:
+     * - Эти фильтры используются для создания отчётов с заданной логикой обработки данных.
+     * - Каждый фильтр настраивается на определённую категорию данных (например, продажи, расходы, возвраты).
+     *
+     * Пример использования:
+     * - Создание отчёта о продажах, выполненных продавцом:
+     *   ReportSetting sellerShippingFee = ReportFilterSettings.getTotalSellerShippingFee();
+     *
+     * - Анализ возвратов за отправку:
+     *   ReportSetting refundsForShippingCredits = ReportFilterSettings.getTotalRefundsForShippingCredits();
+     *
+     * Особенности:
+     * - Каждый метод задаёт:
+     *   1. Название отчёта (например, "Verkaufsgebühren Versand durch Verkäufer").
+     *   2. Фильтры, которые применяются к данным (`columnFilters`).
+     *   3. Числовые колонки (`numericColumns`), используемые для подсчёта итогов.
+     * - Эти фильтры универсальны и охватывают большинство задач по обработке данных.
+     */
     public static ReportSetting getTotalSellerShippingFee() {
         return new ReportSetting(
                 "Verkaufsgebühren Versand durch Verkäufer",
@@ -130,17 +160,7 @@ public class ReportFilterSettings {
         );
     }
 
-    // Описан случай, где выбор наоборот исключает колонки с выбора. Другие все выбираются!
-    public static ReportSetting getTotalServiceFees() {
-        return new ReportSetting(
-                "Servicegebühren",
-                Map.of(
-                        COLUMN_TYP, TYP_SERVICEGEBUEHR,
-                        COLUMN_BESCHREIBUNG, EXCLUDE_WERBEKOSTEN  // Исключающий фильтр
-                ),
-                NUMERIC_GESAMT
-        );
-    }
+
 
     public static ReportSetting getTotalStorageAndServiceFeesForAmazonFulfillment() {
         return new ReportSetting(
@@ -182,17 +202,6 @@ public class ReportFilterSettings {
         );
     }
 
-    // Описан случай, где выбор наоборот исключает колонки с выбора. Другие все выбираются!
-    public static ReportSetting getTotalFBALogisticsInventoryCredits() {
-        return new ReportSetting(
-                "FBA Lagerbestandsguthaben",
-                Map.of(
-                        COLUMN_TYP, TYP_ANPASSUNG,
-                        COLUMN_BESCHREIBUNG, EXCLUDE_ALLGEMEINE_ANPASSUNG  // Исключающий фильтр
-                ),
-                NUMERIC_GESAMT
-        );
-    }
 
     public static ReportSetting getTotalRefundsForAmazonShippedItems() {
         return new ReportSetting(
@@ -225,6 +234,88 @@ public class ReportFilterSettings {
         );
     }
 
+
+    /**
+     * Фильтры с исключающими условиями.
+     *
+     * Эти методы создают объекты ReportSetting, которые фильтруют данные, исключая
+     * определённые значения из выборки. Все остальные данные, которые не попадают под
+     * исключения, включаются в отчёт.
+     *
+     * Основная задача:
+     * - Фильтрация данных с учётом исключений. Например:
+     *   1. Исключение определённых типов затрат (например, "Werbekosten" в Servicegebühren).
+     *   2. Исключение конкретных описаний (например, общих корректировок в FBA Lagerbestandsguthaben).
+     *
+     * Применение:
+     * - Эти фильтры полезны для случаев, когда требуется работать с данными, за исключением
+     *   определённых значений, которые не должны включаться в отчёт.
+     * - Применяются для специфических задач, например, при анализе затрат или возвратов,
+     *   где важно исключить незначительные или нерелевантные записи.
+     *
+     * Пример использования:
+     * - Создание отчёта, исключающего рекламные расходы:
+     *   ReportSetting serviceFeesReport = ReportFilterSettings.getTotalServiceFees();
+     *
+     * - Создание отчёта, исключающего общие корректировки:
+     *   ReportSetting inventoryCreditsReport = ReportFilterSettings.getTotalFBALogisticsInventoryCredits();
+     *
+     * Особенности:
+     * - Исключающие фильтры задаются в параметрах Map, где ключ — это колонка,
+     *   а значение — список исключений.
+     * - Такие фильтры позволяют гибко настраивать отчёты под специфические требования.
+     */
+
+    public static ReportSetting getTotalServiceFees() {
+        return new ReportSetting(
+                "Servicegebühren",
+                Map.of(
+                        COLUMN_TYP, TYP_SERVICEGEBUEHR,
+                        COLUMN_BESCHREIBUNG, EXCLUDE_WERBEKOSTEN  // Исключающий фильтр
+                ),
+                NUMERIC_GESAMT
+        );
+    }
+
+    public static ReportSetting getTotalFBALogisticsInventoryCredits() {
+        return new ReportSetting(
+                "FBA Lagerbestandsguthaben",
+                Map.of(
+                        COLUMN_TYP, TYP_ANPASSUNG,
+                        COLUMN_BESCHREIBUNG, EXCLUDE_ALLGEMEINE_ANPASSUNG  // Исключающий фильтр
+                ),
+                NUMERIC_GESAMT
+        );
+    }
+
+
+
+
+    /**
+     * Фильтры для получения полного списка значений из указанных колонок.
+     *
+     * Эти методы создают объекты ReportSetting, предназначенные для фильтрации данных
+     * и извлечения полного списка значений из определённой колонки.
+     *
+     * Основная задача:
+     * - Применение фильтров для получения всех значений из указанной колонки без их модификации.
+     * - Использование полного списка значений может быть полезно для:
+     *   1. Дальнейшей фильтрации (например, передача значений в другой отчёт или использование их в бизнес-логике).
+     *   2. Прямого анализа данных (например, для отчётов, статистики или отображения сырых данных).
+     *
+     * Применение:
+     * - Эти фильтры удобны для извлечения таких данных, как номера заказов, транзакции, типы операций и т.д.
+     * - Полный список значений используется как источник данных для других шагов обработки.
+     *
+     * Пример использования:
+     * - Получение списка значений из определённой колонки:
+     *   ReportSetting fullColumnFilter = ReportFilterSettings.getUniqueValuesFromFilteredColumn();
+     *
+     * Особенности:
+     * - Методы возвращают настроенный ReportSetting, где указана колонка, из которой извлекается полный список значений.
+     * - Каждый метод настроен на работу с конкретными типами данных.
+     */
+
     public static ReportSetting getUniqueValuesFromFilteredColumn() {
         return new ReportSetting(
                 "Reine Rückerstattungskosten zur Verkaufsgebühr, ohne berechneten Rückerstattungsgebühren",
@@ -237,18 +328,54 @@ public class ReportFilterSettings {
         );
     }
 
-    // Метод для создания фильтра, использующего уникальные значения, извлечённые из определённой колонки.
-// Уникальный список значений передаётся как параметр и применяется к указанной колонке.
+    /**
+     * Создаёт объект ReportSetting на основе уникальных значений, извлечённых из определённой колонки.
+     *
+     * Этот метод используется для создания фильтра, в который передаётся список уникальных значений.
+     * Эти значения применяются к указанной колонке (COLUMN_BESTELLNUMMER) и используются
+     * для фильтрации данных.
+     *
+     * Применение:
+     * - Метод получает список уникальных значений (uniqueValues) как параметр.
+     * - Эти значения автоматически устанавливаются в фильтр указанной колонки.
+     * - Результат — готовый объект ReportSetting с применёнными фильтрами.
+     *
+     * Использование:
+     * - Этот метод удобен, если у вас уже есть список уникальных значений, извлечённых из данных.
+     * - Подходит для случаев, когда нужно использовать заранее подготовленный набор данных
+     *   для дальнейшей обработки.
+     *
+     * @param uniqueValues Список уникальных значений, которые применяются к фильтру.
+     * @return Новый объект ReportSetting с установленными фильтрами.
+     */
     public static ReportSetting buildFilterFromUniqueColumnValues(List<String> uniqueValues) {
         return new ReportSetting(
-                "TestIT",
+                "Bearbeitungsgebühren für Erstattungen", // Название отчёта
                 Map.of(
-                        COLUMN_BESTELLNUMMER, uniqueValues // Передаём уникальный список сюда
+                        COLUMN_BESTELLNUMMER, uniqueValues // Применяем уникальные значения к колонке
                 ),
-                NUMERIC_VERKAUFSGEBUEHREN
+                NUMERIC_VERKAUFSGEBUEHREN // Указываем числовые колонки для подсчёта
         );
     }
 
+    /**
+     * Создаёт новый объект ReportSetting, используя уникальные значения, извлечённые из первого отчёта.
+     *
+     * Этот метод выполняет следующие шаги:
+     * 1. Извлекает уникальные значения из последней числовой колонки первого отчёта (firstReport),
+     *    применяя фильтры, заданные в этом отчёте.
+     * 2. Применяет эти уникальные значения к шаблону второго отчёта (templateReport) для создания
+     *    нового фильтра.
+     *
+     * Использование:
+     * - Первый отчёт (firstReport) используется для выборки уникальных значений.
+     * - Второй отчёт (templateReport) служит шаблоном, в который встраиваются уникальные значения.
+     * - Результат — новый объект ReportSetting, готовый к дальнейшей обработке.
+     *
+     * @param firstReport Первый отчёт, на основе которого извлекаются уникальные значения.
+     * @param templateReport Шаблон второго отчёта, куда добавляются уникальные значения.
+     * @return Новый объект ReportSetting с обновлёнными фильтрами.
+     */
     public static ReportSetting createFilteredReportFromAnother(ReportSetting firstReport, ReportSetting templateReport) {
         // Извлекаем уникальные значения из первого объекта
         UniqueValuesProcessor processor = new UniqueValuesProcessor();
@@ -265,6 +392,7 @@ public class ReportFilterSettings {
                 templateReport.getNumericColumns()
         );
     }
+
 
 
 
