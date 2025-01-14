@@ -228,21 +228,22 @@ public class ReportFilterSettings {
 
                 ),
 
-                UNIQUE_LIST_BESTELLNUMMER
+                NUMERIC_VERKAUFSGEBUEHREN
         );
     }
 
-    //Tests
-    public static ReportSetting getTotalRefundAmountForReturnedShipments2() {
+    // Метод для создания фильтра, использующего уникальные значения, извлечённые из определённой колонки.
+// Уникальный список значений передаётся как параметр и применяется к указанной колонке.
+    public static ReportSetting buildFilterFromUniqueColumnValues(List<String> uniqueValues) {
         return new ReportSetting(
                 "TestIT",
                 Map.of(
-                        COLUMN_BESTELLUNG,List.of("028-0001650-0973127")
-
+                        COLUMN_BESTELLUNG, uniqueValues // Передаём уникальный список сюда
                 ),
                 NUMERIC_VERKAUFSGEBUEHREN
         );
     }
+
 
 
 
