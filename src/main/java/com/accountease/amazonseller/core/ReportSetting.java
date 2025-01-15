@@ -72,4 +72,14 @@ public class ReportSetting {
     }
 
 
+    @Override
+    public String toString() {
+        return "ReportSetting{name='" + name + '\'' +
+                ", columnFilters=" + columnFilters +
+                ", numericColumns=" + numericColumns +
+                '}';
+    }
+
+
+
 }

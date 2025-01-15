@@ -1,5 +1,6 @@
 package com.accountease.amazonseller.core.constants;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.qameta.allure.Epic;
@@ -15,7 +16,7 @@ public class FilterConstantsTest {
     @Test
     @DisplayName("Verify DATE_COLUMN_EXCEL constant")
     void testDateColumnExcel() {
-        assertEquals("Datum/Uhrzeit", FilterConstants.DATE_COLUMN_EXCEL,
+        Assertions.assertEquals("Datum/Uhrzeit", FilterConstants.DATE_COLUMN_EXCEL,
                 "FilterConstants.DATE_COLUMN_EXCEL does not match the expected value.");
     }
 
