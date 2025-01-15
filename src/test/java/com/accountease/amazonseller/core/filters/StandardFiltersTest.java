@@ -15,28 +15,27 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Юнит-тесты для класса StandardFilters.
+ * Unit tests for the StandardFilters class.
  *
- * Эти тесты проверяют корректность параметров, предоставляемых методами класса StandardFilters
- * (например, getTotalSellerShippingFee, getTotalAmazonShippingFee и другими). Они проверяют, что
- * возвращаемые объекты {@link ReportSetting} содержат ожидаемые значения для имени, фильтров колонок
- * и числовых колонок.
+ * These tests validate the correctness of parameters provided by the methods in the StandardFilters class
+ * (e.g., getTotalSellerShippingFee, getTotalAmazonShippingFee, and others). They ensure that the returned
+ * {@link ReportSetting} objects contain the expected values for the name, column filters, and numeric columns.
  *
- * Основная цель этих тестов — гарантировать, что фильтры содержат строго определённые значения,
- * которые являются критически важными для бизнес-логики программы. Любые изменения параметров фильтров,
- * такие как имена, значения фильтров колонок или числовые колонки, приведут к сбоям в работе программы.
- * Это обусловлено тем, что фильтры определяют ключевые аспекты генерации отчётов, фильтрации данных
- * и бизнес-процессов.
+ * The primary purpose of these tests is to guarantee that the filters contain strictly defined values,
+ * which are critical to the program's business logic. Any changes to the filter parameters, such as names,
+ * column filter values, or numeric columns, will cause the program to malfunction. This is because the filters
+ * define the key aspects of report generation, data filtering, and business processes.
  *
- * Хотя фактические значения параметров проверяются отдельно в {@link FilterConstantsTest}, эти тесты
- * валидируют их правильную интеграцию и использование в методах класса StandardFilters. Это обеспечивает
- * изолированность тестов и точную проверку конфигурации фильтров в этом классе.
+ * While the actual parameter values are validated separately in {@link FilterConstantsTest}, these tests
+ * verify their proper integration and usage within the methods of the StandardFilters class. This ensures
+ * that the tests are isolated and accurately validate the filter configuration within this class.
  *
- * Любые изменения в логике фильтров (например, модификация значений, обновление структуры данных или
- * бизнес-правил) немедленно вызовут сбои в этих тестах, что поможет быстро выявить и устранить проблемы,
- * связанные с конфигурацией фильтров в StandardFilters. Эти тесты являются критически важными для
- * поддержания стабильности и предсказуемого поведения программы.
+ * Any changes to the filter logic (e.g., value modifications, data structure updates, or business rules)
+ * will immediately trigger failures in these tests, helping to quickly identify and resolve issues related
+ * to the configuration of filters in StandardFilters. These tests are critical for maintaining the stability
+ * and predictable behavior of the program.
  */
+
 
 
 @Epic("Validation of Filter Parameters for Accuracy and Correctness")
