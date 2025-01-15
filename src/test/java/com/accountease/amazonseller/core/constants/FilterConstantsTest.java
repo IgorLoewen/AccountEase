@@ -16,7 +16,7 @@ public class FilterConstantsTest {
     @Test
     @DisplayName("Verify DATE_COLUMN_EXCEL constant")
     void testDateColumnExcel() {
-        Assertions.assertEquals("Datum/Uhrzeit", FilterConstants.DATE_COLUMN_EXCEL,
+        assertEquals("Datum/Uhrzeit", FilterConstants.DATE_COLUMN_EXCEL,
                 "FilterConstants.DATE_COLUMN_EXCEL does not match the expected value.");
     }
 

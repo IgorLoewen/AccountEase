@@ -1,7 +1,7 @@
 package com.accountease.amazonseller.utils;
 
 import com.accountease.amazonseller.core.filters.ExclusionFilters;
-import com.accountease.amazonseller.core.filters.StandartFilters;
+import com.accountease.amazonseller.core.filters.StandardFilters;
 import com.accountease.amazonseller.core.filters.ValueListFilters;
 import com.accountease.amazonseller.core.ReportSetting;
 
@@ -13,23 +13,23 @@ public class IncomeReportColumnCalculator {
 
         try {
             // Вызываем обработку отчётов напрямую
-            processAndPrintReport(StandartFilters.getTotalSellerShippingFee());
-            processAndPrintReport(StandartFilters.getTotalAmazonShippingFee());
-            processAndPrintReport(StandartFilters.getTotalSalesSumSeller());
-            processAndPrintReport(StandartFilters.getTotalSalesSumAmazon());
-            processAndPrintReport(StandartFilters.getTotalAdvertisingCosts());
-            processAndPrintReport(StandartFilters.getTotalAmazonFulfillmentFees());
-            processAndPrintReport(StandartFilters.getTotalPromotionalDiscountsFees());
-            processAndPrintReport(StandartFilters.getTotalAdjustmentsFees());
+            processAndPrintReport(StandardFilters.getTotalSellerShippingFee());
+            processAndPrintReport(StandardFilters.getTotalAmazonShippingFee());
+            processAndPrintReport(StandardFilters.getTotalSalesSumSeller());
+            processAndPrintReport(StandardFilters.getTotalSalesSumAmazon());
+            processAndPrintReport(StandardFilters.getTotalAdvertisingCosts());
+            processAndPrintReport(StandardFilters.getTotalAmazonFulfillmentFees());
+            processAndPrintReport(StandardFilters.getTotalPromotionalDiscountsFees());
+            processAndPrintReport(StandardFilters.getTotalAdjustmentsFees());
             processAndPrintReport(ExclusionFilters.getTotalServiceFees());
-            processAndPrintReport(StandartFilters.getTotalStorageAndServiceFeesForAmazonFulfillment());
-            processAndPrintReport(StandartFilters.getTotalRefundsForShippingCredits());
-            processAndPrintReport(StandartFilters.getTotalRefundsForPromotionalDiscounts());
-            processAndPrintReport(StandartFilters.getTotalShippingCreditNotes());
+            processAndPrintReport(StandardFilters.getTotalStorageAndServiceFeesForAmazonFulfillment());
+            processAndPrintReport(StandardFilters.getTotalRefundsForShippingCredits());
+            processAndPrintReport(StandardFilters.getTotalRefundsForPromotionalDiscounts());
+            processAndPrintReport(StandardFilters.getTotalShippingCreditNotes());
             processAndPrintReport(ExclusionFilters.getTotalFBALogisticsInventoryCredits());
-            processAndPrintReport(StandartFilters.getTotalRefundsForAmazonShippedItems());
-            processAndPrintReport(StandartFilters.getTotalRefundsForAmazonTransactionFees());
-            processAndPrintReport(StandartFilters.getTotalRefundAmountForReturnedShipments());
+            processAndPrintReport(StandardFilters.getTotalRefundsForAmazonShippedItems());
+            processAndPrintReport(StandardFilters.getTotalRefundsForAmazonTransactionFees());
+            processAndPrintReport(StandardFilters.getTotalRefundAmountForReturnedShipments());
 
             // Делаем финальный отчёт через метод
             ReportSetting finalReport = ReportProcessingTools.processAndFilterWithUniqueValues(

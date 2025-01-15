@@ -2,6 +2,7 @@ package com.accountease.amazonseller.core.filters;
 
 import com.accountease.amazonseller.core.ReportSetting;
 import com.accountease.amazonseller.core.constants.FilterConstants;
+import com.accountease.amazonseller.core.constants.FilterConstantsTest;
 import io.qameta.allure.Epic;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,6 +14,27 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Unit tests for the ExclusionFilters class.
+ *
+ * These tests ensure the correctness of the parameters provided by the ExclusionFilters methods
+ * (e.g., getTotalServiceFees, getTotalFBALogisticsInventoryCredits). They validate that the returned
+ * {@link ReportSetting} objects contain the expected values for the name, column filters, and numeric columns.
+ *
+ * The primary purpose of these tests is to ensure that the filters contain strictly defined values,
+ * which are critical to the functionality of the program's business logic. Any change to the filter parameters,
+ * such as names, column filter values, or numeric columns, will cause the program to malfunction. This is
+ * because the filters determine the key aspects of report generation, data filtering, and business operations.
+ *
+ * Although the actual values for {@link FilterConstants} are tested separately in {@link FilterConstantsTest},
+ * these tests validate their correct integration and usage within the ExclusionFilters methods. This ensures
+ * the tests are isolated and specifically verify the filter configuration in this class.
+ *
+ * Any changes in the filter logic (e.g., value modifications, data structure updates, or business rules)
+ * will cause these tests to fail immediately, helping identify and address issues related to the
+ * ExclusionFilters configuration. These tests are critical for maintaining the program's stability
+ * and predictable behavior.
+ */
 
 @Epic("Validation of Filter Parameters for Accuracy and Correctness")
 @DisplayName("ExclusionFiltersTest")
