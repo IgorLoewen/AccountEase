@@ -23,6 +23,7 @@
 /build/
 # Игнорируем всю папку target
 /target/
+/docs/
 
 # IntelliJ IDEA project files
 .idea/

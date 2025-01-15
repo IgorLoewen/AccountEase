@@ -12,7 +12,7 @@ import java.util.Map;
  * по заранее определённым критериям, таким как типы заказов, рекламные расходы,
  * комиссии за обработку и т.д.
  */
-public class StandartFilters {
+public class StandardFilters {
 
     public static ReportSetting getTotalSellerShippingFee() {
         return new ReportSetting(
