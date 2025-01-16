@@ -7,7 +7,7 @@ import com.accountease.amazonseller.core.ReportSetting;
 
 import java.util.Collections;
 
-public class IncomeReportColumnCalculator {
+public class ReportDebugTool {
 
     public static void main(String[] args) {
 
