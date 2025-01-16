@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 @Epic("Date Filtering")
-@Feature("Filter rows based on a date range")
+@DisplayName("DateFiltersTest")
 public class DateFilterTest {
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
@@ -56,9 +56,7 @@ public class DateFilterTest {
     }
 
     @Test
-    @Story("Filter valid date rows")
-    @Description("Tests that rows with dates within the range are included in the result.")
-    @DisplayName("Filter rows with valid dates")
+   @DisplayName("Filter rows with valid dates")
     public void testFilterValidData() {
         // Arrange
         List<Map<String, String>> data = List.of(
@@ -73,8 +71,6 @@ public class DateFilterTest {
     }
 
     @Test
-    @Story("Exclude rows with dates out of range")
-    @Description("Tests that rows with dates outside the range are excluded from the result.")
     @DisplayName("Filter rows with out-of-range dates")
     public void testFilterOutOfRangeData() {
         // Arrange
@@ -90,8 +86,6 @@ public class DateFilterTest {
     }
 
     @Test
-    @Story("Handle invalid date formats")
-    @Description("Tests that rows with invalid date formats are ignored.")
     @DisplayName("Filter rows with invalid date format")
     public void testFilterInvalidDateFormat() {
         // Arrange
@@ -107,8 +101,6 @@ public class DateFilterTest {
     }
 
     @Test
-    @Story("Exclude rows with missing date column")
-    @Description("Tests that rows without the date column are ignored.")
     @DisplayName("Filter rows with missing date column")
     public void testFilterMissingDateColumn() {
         // Arrange
@@ -124,9 +116,7 @@ public class DateFilterTest {
     }
 
     @Test
-    @Story("Constructor validation")
-    @Description("Tests that the constructor throws an exception for invalid date strings.")
-    @DisplayName("Constructor with invalid date strings")
+   @DisplayName("Constructor with invalid date strings")
     public void testConstructorInvalidDates() {
         // Act & Assert
         assertThrows(ParseException.class, () ->
