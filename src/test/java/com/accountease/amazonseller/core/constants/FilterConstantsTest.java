@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 
 @Epic("Validation of FilterConstants for correctness and consistency")
-@DisplayName("Filter Constants Test Suite")
+@DisplayName("FilterConstantsTest")
 public class FilterConstantsTest {
 
     @Test

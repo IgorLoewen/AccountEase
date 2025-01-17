@@ -69,7 +69,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @Epic("Multi-Column Filtering")
-@DisplayName("Tests for MultiColumnFilter Class")
+@DisplayName("MultiColumnFilterTest")
 public class MultiColumnFilterTest {
 
     private final MultiColumnFilter multiColumnFilter = new MultiColumnFilter();
