@@ -2,6 +2,7 @@ package com.accountease.amazonseller.core.processor;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import io.qameta.allure.*;
 
@@ -38,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * helping to quickly identify and resolve potential issues. They serve as a safeguard to ensure
  * predictable behavior and correct implementation of the date filtering functionality.
  */
-
+@Tag("unit")
 @Epic("Date Filtering")
 @DisplayName("DateFiltersTest")
 class DateFilterTest {

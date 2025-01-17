@@ -1,6 +1,7 @@
 package com.accountease.amazonseller.core.processor;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import io.qameta.allure.Epic;
@@ -48,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * - Covering all edge cases helps prevent potential bugs and guarantees that the method works
  *   correctly with any input data.
  */
-
+@Tag("unit")
 @Epic("Summation Processor")
 @DisplayName("SummationProcessorTest")
 class SummationProcessorTest {

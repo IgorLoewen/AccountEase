@@ -5,6 +5,7 @@ import com.accountease.amazonseller.core.constants.FilterConstants;
 import com.accountease.amazonseller.core.constants.FilterConstantsTest;
 import io.qameta.allure.Epic;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -35,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * ExclusionFilters configuration. These tests are critical for maintaining the program's stability
  * and predictable behavior.
  */
-
+@Tag("unit")
 @Epic("Validation of Filter Parameters for Accuracy and Correctness")
 @DisplayName("ExclusionFiltersTest")
 class ExclusionFiltersTest {

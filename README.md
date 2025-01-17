@@ -28,3 +28,6 @@ mvn clean verify
    ```bash
    open docs/index.html
    ```
+
+### Запуск тестов для анотоции @Tag с классификацией юнит, для моих юнит тестов:
+mvn test -DincludeTags=unit  

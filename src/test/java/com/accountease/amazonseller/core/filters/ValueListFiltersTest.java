@@ -5,6 +5,7 @@ import com.accountease.amazonseller.core.constants.FilterConstants;
 import com.accountease.amazonseller.core.constants.FilterConstantsTest;
 import io.qameta.allure.Epic;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -40,6 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * immediately trigger failures in these tests. This ensures that the ValueListFilters class remains reliable and
  * functions as intended within the broader system.
  */
+@Tag("unit")
 @Epic("Validation of Filter Parameters for Accuracy and Correctness")
 @DisplayName("ValueListFiltersTest")
 class ValueListFiltersTest {

@@ -1,6 +1,7 @@
 package com.accountease.amazonseller.core.constants;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import io.qameta.allure.Epic;
 
@@ -21,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * - The tests confirm that the current explicit variable names enhance the understanding of the project
  *   structure and simplify the development process.
  */
-
+@Tag("unit")
 @Epic("Validation of FilterConstants for correctness and consistency")
 @DisplayName("FilterConstantsTest")
 public class FilterConstantsTest {

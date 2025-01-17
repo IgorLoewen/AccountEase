@@ -2,6 +2,7 @@ package com.accountease.amazonseller.core.processor;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import io.qameta.allure.Epic;
 
@@ -67,7 +68,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * of the MultiColumnFilter class, even when the logic is modified.
  */
 
-
+@Tag("unit")
 @Epic("Multi-Column Filtering")
 @DisplayName("MultiColumnFilterTest")
 class MultiColumnFilterTest {
