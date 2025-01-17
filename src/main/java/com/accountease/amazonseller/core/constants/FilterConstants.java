@@ -4,12 +4,21 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
- * Класс для хранения констант, используемых в фильтрах.
+ * The class for storing constants used in filters.
  *
- * Описание:
- * - Содержит названия колонок, уникальные значения, списки исключений и другие параметры,
- *   которые используются в методах фильтрации.
- * - Помогает централизованно управлять всеми параметрами, избегая дублирования.
+ * Description:
+ * - Contains column names, unique values, exclusion lists, and other parameters
+ *   used in filtering methods.
+ * - The variable names and their values are critically important for the correct
+ *   operation of the filters. Any changes can affect the business logic and
+ *   compromise the system's stability.
+ * - Facilitates centralized management of all parameters, avoiding duplication
+ *   and simplifying the development process.
+ * - At this stage, explicit variable names enhance the understanding of the
+ *   project structure and make working with the code easier.
+ * - In the future, for scaling the project, it will be possible to add row
+ *   indexing to use functional templates for all languages, improving the
+ *   adaptability and extensibility of the system.
  */
 public class FilterConstants {
 

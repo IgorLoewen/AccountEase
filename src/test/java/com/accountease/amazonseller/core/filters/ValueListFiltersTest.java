@@ -2,6 +2,7 @@ package com.accountease.amazonseller.core.filters;
 
 import com.accountease.amazonseller.core.ReportSetting;
 import com.accountease.amazonseller.core.constants.FilterConstants;
+import com.accountease.amazonseller.core.constants.FilterConstantsTest;
 import io.qameta.allure.Epic;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,9 +22,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * the returned {@link ReportSetting} objects contain the expected values for the name, column filters,
  * and numeric columns or unique values.
  *
- * These tests are critical to ensure that the filters provide consistent and expected configurations
- * for the program's functionality. Any changes to the filter parameters will cause these tests to fail,
- * ensuring issues are identified early.
+ * The primary purpose of these tests is to verify that the filters provide consistent and expected configurations,
+ * which are critical for the program's business logic. Any changes to the filter parameters, such as names,
+ * column filter values, or unique lists, will cause these tests to fail. This ensures that issues are detected early
+ * and resolved before affecting the functionality.
+ *
+ * While the actual parameter values are validated separately in {@link FilterConstantsTest}, these tests
+ * focus on their proper integration and usage within the methods of the ValueListFilters class. The tests are
+ * isolated and specifically validate the dynamic filter configurations created by this class.
+ *
+ * These tests are parameterized to verify multiple scenarios efficiently. Each parameterized test evaluates
+ * a specific aspect of the filter (e.g., name, column filters, numeric columns, or unique values), ensuring
+ * one assert per test for easier debugging. This design helps pinpoint the exact cause of a failure and facilitates
+ * maintaining the stability and predictability of the program.
+ *
+ * Any changes to the filter logic (e.g., value modifications, data structure updates, or business rules) will
+ * immediately trigger failures in these tests. This ensures that the ValueListFilters class remains reliable and
+ * functions as intended within the broader system.
  */
 @Epic("Validation of Filter Parameters for Accuracy and Correctness")
 @DisplayName("ValueListFiltersTest")

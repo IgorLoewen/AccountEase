@@ -6,11 +6,21 @@ import com.accountease.amazonseller.core.constants.FilterConstants;
 import java.util.Map;
 
 /**
- * Класс для фильтров с исключающими условиями.
+ * The ExclusionFilters class provides methods for creating {@link ReportSetting} objects
+ * that define filters with exclusion conditions.
  *
- * Эти фильтры используются для фильтрации данных, исключая определённые значения из выборки.
- * Все остальные данные, которые не попадают под исключения, включаются в отчёт.
+ * These filters play a key role in the logic of report generation. They ensure that data
+ * is excluded or included in the report strictly in accordance with the specified filtering rules.
+ *
+ * The importance of this class lies in defining the base parameters for data filtering.
+ * Any changes to the filter logic (e.g., modifications to parameters, data structures, or business rules)
+ * directly impact the accuracy and integrity of the generated reports.
+ *
+ * All constants used, such as {@link FilterConstants}, must be configured correctly and
+ * meet the program's expectations. This class is closely integrated with the business logic
+ * and is critically important for maintaining the system's stability and reliable performance.
  */
+
 public class ExclusionFilters {
 
     public static ReportSetting getTotalServiceFees() {

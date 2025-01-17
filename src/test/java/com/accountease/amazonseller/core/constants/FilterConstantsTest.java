@@ -1,6 +1,5 @@
 package com.accountease.amazonseller.core.constants;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.qameta.allure.Epic;
@@ -8,6 +7,20 @@ import io.qameta.allure.Epic;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * Unit tests for the FilterConstants class.
+ *
+ * Description:
+ * - These tests verify the correctness and immutability of the parameters stored in {@link FilterConstants},
+ *   including column names, unique values, exclusion lists, and other critically important parameters.
+ * - The primary goal of the tests is to ensure that all values and variables remain unchanged,
+ *   as they play a key role in the business logic and system stability.
+ * - The validation ensures that any changes to the parameters are detected early, preventing potential
+ *   issues in the operation of filters and related methods.
+ * - The tests confirm that the current explicit variable names enhance the understanding of the project
+ *   structure and simplify the development process.
+ */
 
 @Epic("Validation of FilterConstants for correctness and consistency")
 @DisplayName("Filter Constants Test Suite")

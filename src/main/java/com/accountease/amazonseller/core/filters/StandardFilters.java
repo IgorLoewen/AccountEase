@@ -6,11 +6,21 @@ import com.accountease.amazonseller.core.constants.FilterConstants;
 import java.util.Map;
 
 /**
- * Класс для стандартных фильтров, применяемых в отчётах.
+ * The StandardFilters class provides methods for creating {@link ReportSetting} objects
+ * that define filters with fixed standard conditions.
  *
- * Эти фильтры используются для выполнения стандартной фильтрации данных
- * по заранее определённым критериям, таким как типы заказов, рекламные расходы,
- * комиссии за обработку и т.д.
+ * These filters play a key role in the logic of report generation, ensuring that data
+ * is processed strictly according to the specified parameters. They are used to define
+ * the key aspects of report generation, data filtering, and business operations.
+ *
+ * The importance of this class lies in defining standard filter parameters
+ * that directly affect the accuracy and integrity of the generated reports. Any changes
+ * to the filter logic (e.g., parameter modifications, data structure updates, or business rules)
+ * can disrupt the stability of the system.
+ *
+ * Constants such as {@link FilterConstants} must be correctly configured and fully
+ * aligned with the program's expectations. This class is closely integrated with the application's
+ * business logic and is critically important for ensuring the system's stable operation.
  */
 public class StandardFilters {
 
