@@ -7,10 +7,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Класс для фильтров, возвращающих полный список значений из указанных колонок.
+ * The ValueListFilters class provides methods for creating {@link ReportSetting} objects
+ * that define filters based on lists of unique values.
  *
- * Эти фильтры применяются для получения всех значений из определённой колонки без их модификации.
- * Полный список значений может быть использован для дальнейшей фильтрации, анализа или отображения.
+ * These filters are used for dynamically configuring data filtering conditions. They play an important role
+ * in providing flexible and precise configurations for report generation and data processing.
+ *
+ * The importance of this class lies in ensuring accurate data filtering based on unique values,
+ * which is critical to the program's functionality. Any changes to the filter logic, such as modifications
+ * to parameters or data structures, can lead to system failures.
+ *
+ * The methods in this class allow extracting unique values from specified columns and using them
+ * to create dynamic filters. Constants such as {@link FilterConstants} must be correctly configured
+ * to ensure the application's business logic is executed accurately.
  */
 public class ValueListFilters {
 

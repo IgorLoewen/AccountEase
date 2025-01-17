@@ -28,3 +28,18 @@ mvn clean verify
    ```bash
    open docs/index.html
    ```
+
+### Запуск тестов для анотоции @Tag с классификацией юнит, для моих юнит тестов:
+mvn test -DincludeTags=unit  
+
+### Запуск JaCoCo теста для каждого теста отельно. Стираем папку docs и таргет
+### и после генерации отчёта, открывается JaCoCo отчёт:
+rm -rf target Docs && mvn verify -Dtest=UniqueValuesProcessorTest#testGetUniqueValues_NormalCase && open Docs/index.html
+
+
+
+
+
+mvn verify -Dtest=
+
+open docs/index.html

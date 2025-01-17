@@ -42,7 +42,6 @@ public class ReportSetting {
     public List<String> getNumericColumns() {
         return numericColumns;
     }
-
     public static List<Map<String, String>> getData() {
         return data;
     }
