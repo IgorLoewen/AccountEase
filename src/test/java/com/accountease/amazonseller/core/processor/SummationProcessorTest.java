@@ -51,13 +51,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Epic("Summation Processor")
 @DisplayName("SummationProcessorTest")
-public class SummationProcessorTest {
+class SummationProcessorTest {
 
     private SummationProcessor summationProcessor;
     private List<Map<String, String>> testData;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         summationProcessor = new SummationProcessor();
         testData = List.of(
                 Map.of("testColumnA", "10", "testColumnB", "20.5", "testColumnC", "30"),
@@ -69,7 +69,7 @@ public class SummationProcessorTest {
 
     @Test
     @DisplayName("Calculate total sum for multiple numeric columns")
-    public void testCalculateTotalSumMultipleColumns() {
+    void testCalculateTotalSumMultipleColumns() {
         List<String> numericColumns = List.of("testColumnA", "testColumnB");
 
         Double result = summationProcessor.calculateTotalSum(testData, numericColumns);
@@ -80,7 +80,7 @@ public class SummationProcessorTest {
 
     @Test
     @DisplayName("Handle invalid numeric values in columns")
-    public void testCalculateTotalSumWithInvalidValues() {
+    void testCalculateTotalSumWithInvalidValues() {
         List<String> numericColumns = List.of("testColumnA");
 
         Double result = summationProcessor.calculateTotalSum(testData, numericColumns);
@@ -90,7 +90,7 @@ public class SummationProcessorTest {
 
     @Test
     @DisplayName("Handle empty rows and columns")
-    public void testCalculateTotalSumWithEmptyValues() {
+    void testCalculateTotalSumWithEmptyValues() {
         List<String> numericColumns = List.of("testColumnB", "testColumnC");
 
         Double result = summationProcessor.calculateTotalSum(testData, numericColumns);
@@ -100,7 +100,7 @@ public class SummationProcessorTest {
 
     @Test
     @DisplayName("Handle empty data set")
-    public void testCalculateTotalSumWithEmptyData() {
+    void testCalculateTotalSumWithEmptyData() {
         List<Map<String, String>> emptyData = List.of();
         List<String> numericColumns = List.of("testColumnA", "testColumnB", "testColumnC");
 
@@ -111,7 +111,7 @@ public class SummationProcessorTest {
 
     @Test
     @DisplayName("Handle empty numeric columns")
-    public void testCalculateTotalSumWithEmptyColumns() {
+    void testCalculateTotalSumWithEmptyColumns() {
         List<String> numericColumns = List.of();
 
         Double result = summationProcessor.calculateTotalSum(testData, numericColumns);
@@ -121,7 +121,7 @@ public class SummationProcessorTest {
 
     @Test
     @DisplayName("Handle null data")
-    public void testCalculateTotalSumWithNullData() {
+    void testCalculateTotalSumWithNullData() {
         List<String> numericColumns = List.of("testColumnA", "testColumnB", "testColumnC");
 
         Double result = summationProcessor.calculateTotalSum(null, numericColumns);
@@ -131,7 +131,7 @@ public class SummationProcessorTest {
 
     @Test
     @DisplayName("Handle null numeric columns")
-    public void testCalculateTotalSumWithNullColumns() {
+    void testCalculateTotalSumWithNullColumns() {
         Double result = summationProcessor.calculateTotalSum(testData, null);
 
         assertEquals(0.0, result, "Expected total sum for null numeric columns to be 0.0.");
@@ -139,7 +139,7 @@ public class SummationProcessorTest {
 
     @Test
     @DisplayName("Handle mixed edge cases in data and columns")
-    public void testCalculateTotalSumWithMixedCases() {
+    void testCalculateTotalSumWithMixedCases() {
         List<Map<String, String>> mixedData = List.of(
                 Map.of("testColumnA", "10", "testColumnB", "", "testColumnC", "invalid"),
                 Map.of("testColumnA", "5", "testColumnB", "invalid", "testColumnC", "20"),

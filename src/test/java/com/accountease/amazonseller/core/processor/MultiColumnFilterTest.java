@@ -70,14 +70,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Epic("Multi-Column Filtering")
 @DisplayName("MultiColumnFilterTest")
-public class MultiColumnFilterTest {
+class MultiColumnFilterTest {
 
     private final MultiColumnFilter multiColumnFilter = new MultiColumnFilter();
 
     private List<Map<String, String>> testData;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         testData = List.of(
                 Map.of("testColumnA", "testValue1", "testColumnB", "testValue2"),
                 Map.of("testColumnA", "testValue3", "testColumnB", "testValue4"),
@@ -88,7 +88,7 @@ public class MultiColumnFilterTest {
 
     @Test
     @DisplayName("Filter by single column - Validate number of rows")
-    public void testFilterByColumnsSingleColumnRowCount() {
+    void testFilterByColumnsSingleColumnRowCount() {
         Map<String, List<String>> columnFilters = Map.of("testColumnA", List.of("testValue1"));
 
         List<Map<String, String>> result = multiColumnFilter.filterByColumns(columnFilters, testData);
@@ -98,7 +98,7 @@ public class MultiColumnFilterTest {
 
     @Test
     @DisplayName("Filter by single column - Validate first row")
-    public void testFilterByColumnsSingleColumnFirstRow() {
+    void testFilterByColumnsSingleColumnFirstRow() {
         Map<String, List<String>> columnFilters = Map.of("testColumnA", List.of("testValue1"));
 
         List<Map<String, String>> result = multiColumnFilter.filterByColumns(columnFilters, testData);
@@ -108,7 +108,7 @@ public class MultiColumnFilterTest {
 
     @Test
     @DisplayName("Filter by single column - Validate second row")
-    public void testFilterByColumnsSingleColumnSecondRow() {
+    void testFilterByColumnsSingleColumnSecondRow() {
         Map<String, List<String>> columnFilters = Map.of("testColumnA", List.of("testValue1"));
 
         List<Map<String, String>> result = multiColumnFilter.filterByColumns(columnFilters, testData);
@@ -118,7 +118,7 @@ public class MultiColumnFilterTest {
 
     @Test
     @DisplayName("Filter by multiple columns - Validate number of rows")
-    public void testFilterByColumnsMultipleColumnsRowCount() {
+    void testFilterByColumnsMultipleColumnsRowCount() {
         Map<String, List<String>> columnFilters = Map.of(
                 "testColumnA", List.of("testValue1"),
                 "testColumnB", List.of("testValue2")
@@ -131,7 +131,7 @@ public class MultiColumnFilterTest {
 
     @Test
     @DisplayName("Filter by multiple columns - Validate testColumnA content")
-    public void testFilterByColumnsMultipleColumnsContentColumnA() {
+    void testFilterByColumnsMultipleColumnsContentColumnA() {
         Map<String, List<String>> columnFilters = Map.of(
                 "testColumnA", List.of("testValue1"),
                 "testColumnB", List.of("testValue2")
@@ -144,7 +144,7 @@ public class MultiColumnFilterTest {
 
     @Test
     @DisplayName("Filter by multiple columns - Validate testColumnB content")
-    public void testFilterByColumnsMultipleColumnsContentColumnB() {
+    void testFilterByColumnsMultipleColumnsContentColumnB() {
         Map<String, List<String>> columnFilters = Map.of(
                 "testColumnA", List.of("testValue1"),
                 "testColumnB", List.of("testValue2")
@@ -157,7 +157,7 @@ public class MultiColumnFilterTest {
 
     @Test
     @DisplayName("Filter with empty filters - Validate row count")
-    public void testFilterByColumnsEmptyFiltersRowCount() {
+    void testFilterByColumnsEmptyFiltersRowCount() {
         Map<String, List<String>> columnFilters = Map.of();
 
         List<Map<String, String>> result = multiColumnFilter.filterByColumns(columnFilters, testData);
@@ -167,7 +167,7 @@ public class MultiColumnFilterTest {
 
     @Test
     @DisplayName("Filter with empty data - Validate row count")
-    public void testFilterByColumnsEmptyDataRowCount() {
+    void testFilterByColumnsEmptyDataRowCount() {
         Map<String, List<String>> columnFilters = Map.of("testColumnA", List.of("testValue1"));
         List<Map<String, String>> emptyData = List.of();
 
@@ -178,7 +178,7 @@ public class MultiColumnFilterTest {
 
     @Test
     @DisplayName("Filter with missing column - Validate row count")
-    public void testFilterByColumnsMissingColumnRowCount() {
+    void testFilterByColumnsMissingColumnRowCount() {
         Map<String, List<String>> columnFilters = Map.of("testColumnC", List.of("testValue1"));
 
         List<Map<String, String>> result = multiColumnFilter.filterByColumns(columnFilters, testData);
@@ -188,7 +188,7 @@ public class MultiColumnFilterTest {
 
     @Test
     @DisplayName("Validate handling of null columnFilters")
-    public void testFilterByColumnsNullColumnFilters() {
+    void testFilterByColumnsNullColumnFilters() {
         Map<String, List<String>> columnFilters = null;
 
         List<Map<String, String>> result = multiColumnFilter.filterByColumns(columnFilters, testData);
@@ -198,7 +198,7 @@ public class MultiColumnFilterTest {
 
     @Test
     @DisplayName("Validate handling of null data")
-    public void testFilterByColumnsNullData() {
+    void testFilterByColumnsNullData() {
         Map<String, List<String>> columnFilters = Map.of("testColumnA", List.of("testValue1"));
         List<Map<String, String>> data = null;
 
@@ -209,7 +209,7 @@ public class MultiColumnFilterTest {
 
     @Test
     @DisplayName("Validate handling of empty columnFilters")
-    public void testFilterByColumnsEmptyColumnFilters() {
+    void testFilterByColumnsEmptyColumnFilters() {
         Map<String, List<String>> columnFilters = Map.of();
 
         List<Map<String, String>> result = multiColumnFilter.filterByColumns(columnFilters, testData);
@@ -219,7 +219,7 @@ public class MultiColumnFilterTest {
 
     @Test
     @DisplayName("Validate handling of empty data")
-    public void testFilterByColumnsEmptyData() {
+    void testFilterByColumnsEmptyData() {
         Map<String, List<String>> columnFilters = Map.of("testColumnA", List.of("testValue1"));
         List<Map<String, String>> data = List.of();
 

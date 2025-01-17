@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Epic("Date Filtering")
 @DisplayName("DateFiltersTest")
-public class DateFilterTest {
+class DateFilterTest {
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
     private static final String DATE_COLUMN_EXCEL = "Datum/Uhrzeit";
@@ -51,13 +51,13 @@ public class DateFilterTest {
     private DateFilter dateFilter;
 
     @BeforeEach
-    public void setUp() throws ParseException {
+    void setUp() throws ParseException {
         dateFilter = new DateFilter(DATE_COLUMN_EXCEL, START_DATE, END_DATE, DATE_FORMAT);
     }
 
     @Test
    @DisplayName("Filter rows with valid dates")
-    public void testFilterValidData() {
+    void testFilterValidData() {
         // Arrange
         List<Map<String, String>> data = List.of(
                 Map.of(DATE_COLUMN_EXCEL, "05.01.2025 12:30:00", "value", "valid") // Valid date
@@ -72,7 +72,7 @@ public class DateFilterTest {
 
     @Test
     @DisplayName("Filter rows with out-of-range dates")
-    public void testFilterOutOfRangeData() {
+    void testFilterOutOfRangeData() {
         // Arrange
         List<Map<String, String>> data = List.of(
                 Map.of(DATE_COLUMN_EXCEL, "15.01.2025 08:45:00", "value", "outOfRange") // Out of range
@@ -87,7 +87,7 @@ public class DateFilterTest {
 
     @Test
     @DisplayName("Filter rows with invalid date format")
-    public void testFilterInvalidDateFormat() {
+    void testFilterInvalidDateFormat() {
         // Arrange
         List<Map<String, String>> data = List.of(
                 Map.of(DATE_COLUMN_EXCEL, "DateFilterTestDate", "value", "invalid") // Invalid format
@@ -102,7 +102,7 @@ public class DateFilterTest {
 
     @Test
     @DisplayName("Filter rows with missing date column")
-    public void testFilterMissingDateColumn() {
+    void testFilterMissingDateColumn() {
         // Arrange
         List<Map<String, String>> data = List.of(
                 Map.of("value", "missingDate") // Missing date column
@@ -117,7 +117,7 @@ public class DateFilterTest {
 
     @Test
    @DisplayName("Constructor with invalid date strings")
-    public void testConstructorInvalidDates() {
+    void testConstructorInvalidDates() {
         // Act & Assert
         assertThrows(ParseException.class, () ->
                         new DateFilter(DATE_COLUMN_EXCEL, "invalid-start", END_DATE, DATE_FORMAT),
