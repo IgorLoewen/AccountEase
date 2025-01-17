@@ -10,14 +10,49 @@ import java.util.*;
 public class ExcelReader {
 
     /**
-     * Читает данные из Excel-файла и возвращает их в виде списка карт.
-     * Каждая карта представляет строку, где ключами являются названия колонок.
+     * Class ExcelReader
      *
-     * @param filePath       Путь к Excel-файлу.
-     * @param headerRowIndex Индекс строки, содержащей заголовки колонок.
-     * @return Список строк, представленных в виде карт.
-     * @throws IOException Если при чтении файла произошла ошибка.
+     * This class is responsible for reading data from an Excel file and converting it into a list of maps,
+     * where each map represents a row, and the keys are column headers.
+     *
+     * Method readExcel:
+     * 1. Reads the data from the first sheet of the Excel file specified by the file path.
+     * 2. Extracts the column headers from the row specified by `headerRowIndex`.
+     * 3. Processes all rows after the header row and converts them into a map of column headers to cell values.
+     *
+     * Key Features:
+     * - Handles empty cells by storing them as empty strings in the resulting map.
+     * - Skips rows that are entirely empty.
+     * - Throws an `IllegalArgumentException` if the header row is missing or `headerRowIndex` is incorrect.
+     * - Supports files in `.xlsx` format using Apache POI.
+     *
+     * Parameters:
+     * @param filePath       The path to the Excel file.
+     * @param headerRowIndex The index of the row containing column headers (0-based).
+     *
+     * Returns:
+     * - A list of maps, where each map represents a row in the Excel file. Keys are column names, and values are cell data.
+     *
+     * Example:
+     * For an Excel file with the following content:
+     * ```
+     * Name     Age    Country
+     * John     25     USA
+     * Jane     30     UK
+     * ```
+     * Calling `readExcel("example.xlsx", 0)` will return:
+     * ```
+     * [
+     *   {"Name": "John", "Age": "25", "Country": "USA"},
+     *   {"Name": "Jane", "Age": "30", "Country": "UK"}
+     * ]
+     * ```
+     *
+     * Significance:
+     * - This method provides a reliable way to extract structured data from Excel files for further processing.
+     * - It ensures flexibility in handling diverse file contents, including missing cells and empty rows.
      */
+
     public static List<Map<String, String>> readExcel(String filePath, int headerRowIndex) throws IOException {
         List<Map<String, String>> rows = new ArrayList<>();
 
