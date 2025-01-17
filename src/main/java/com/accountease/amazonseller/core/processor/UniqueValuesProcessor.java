@@ -48,7 +48,7 @@ public class UniqueValuesProcessor {
             throw new IllegalArgumentException("Column name cannot be null.");
         }
 
-        Set<String> uniqueValues = new HashSet<>();
+        Set<String> uniqueValues = new LinkedHashSet<>();
         for (Map<String, String> row : data) {
             String value = row.getOrDefault(column, "").trim();
             if (!value.isEmpty()) {
@@ -122,8 +122,8 @@ public class UniqueValuesProcessor {
         if (data == null) {
             throw new IllegalArgumentException("Data cannot be null.");
         }
-        if (numericColumns == null) {
-            throw new IllegalArgumentException("Numeric columns cannot be null.");
+        if (numericColumns == null || numericColumns.isEmpty()) {
+            throw new IllegalArgumentException("Numeric columns cannot be null or empty.");
         }
         if (columnFilters == null) {
             throw new IllegalArgumentException("Column filters cannot be null.");
