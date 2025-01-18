@@ -18,7 +18,7 @@ allure serve target/allure-results
 
 ### Запуск тестов с генерацией JaCoCo отчета:
 ```bash
-mvn clean verify
+mvn clean verify 
 ```
 
 ### Открытие JaCoCo отчета локально:
