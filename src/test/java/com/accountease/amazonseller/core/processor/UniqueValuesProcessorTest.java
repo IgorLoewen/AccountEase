@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *   handling case sensitivity where required.
  */
 
-@Epic("Unique Values Processor")
+@Epic("Validation and Extraction of Unique Values")
 @DisplayName("UniqueValuesProcessor")
 class UniqueValuesProcessorTest {
 

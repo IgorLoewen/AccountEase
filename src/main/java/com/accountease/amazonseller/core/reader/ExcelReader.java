@@ -58,20 +58,30 @@ public class ExcelReader {
 
         try (FileInputStream fis = new FileInputStream(filePath); Workbook workbook = new XSSFWorkbook(fis)) {
 
-            Sheet sheet = workbook.getSheetAt(0); // Первый лист
+            Sheet sheet = workbook.getSheetAt(0); // First sheet
             Row headerRow = sheet.getRow(headerRowIndex);
 
             if (headerRow == null) {
-                throw new IllegalArgumentException("Строка с заголовками не найдена по индексу: " + headerRowIndex);
+                throw new IllegalArgumentException("Header row not found at index: " + headerRowIndex);
             }
 
-            // Считываем заголовки колонок
+            // Read column headers
             List<String> headers = new ArrayList<>();
             for (Cell cell : headerRow) {
-                headers.add(cell.getStringCellValue().trim());
+                switch (cell.getCellType()) {
+                    case STRING:
+                        headers.add(cell.getStringCellValue().trim());
+                        break;
+                    case NUMERIC:
+                        headers.add(String.valueOf((int) cell.getNumericCellValue())); // Convert to string
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Unsupported cell type in header at column: "
+                                + cell.getColumnIndex() + ". Please check the Excel file structure.");
+                }
             }
 
-            // Считываем данные строк
+            // Read data rows
             for (int rowNum = headerRowIndex + 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
                 Row row = sheet.getRow(rowNum);
                 if (row == null) continue;
@@ -87,4 +97,6 @@ public class ExcelReader {
 
         return rows;
     }
+
+
 }

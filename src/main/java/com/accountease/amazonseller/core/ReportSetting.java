@@ -28,7 +28,7 @@ public class ReportSetting {
         try {
             return ExcelReader.readExcel(FilterConstants.FILE_PATH, FilterConstants.HEADER_ROW_INDEX);
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка при чтении Excel-файла: " + e.getMessage(), e);
+            throw new RuntimeException("Error reading Excel file: " + e.getMessage(), e);
         }
     }
 
@@ -65,7 +65,7 @@ public class ReportSetting {
             SummationProcessor processor = new SummationProcessor();
             return processor.calculateTotalSum(filteredData, numericColumns);
         } catch (Exception e) {
-            throw new RuntimeException("Ошибка обработки отчёта: " + e.getMessage(), e);
+            throw new RuntimeException("Error processing the report: " + e.getMessage(), e);
         }
     }
 
