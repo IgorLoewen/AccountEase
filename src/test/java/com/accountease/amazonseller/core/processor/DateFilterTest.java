@@ -59,67 +59,59 @@ class DateFilterTest {
     @Test
    @DisplayName("Filter rows with valid dates")
     void testFilterValidData() {
-        // Arrange
+
         List<Map<String, String>> data = List.of(
                 Map.of(DATE_COLUMN_EXCEL, "05.01.2025 12:30:00", "value", "valid") // Valid date
         );
 
-        // Act
         List<Map<String, String>> result = dateFilter.filter(data);
 
-        // Assert
         assertEquals(1, result.size(), "Expected exactly one row to pass the filter.");
     }
 
     @Test
     @DisplayName("Filter rows with out-of-range dates")
     void testFilterOutOfRangeData() {
-        // Arrange
+
         List<Map<String, String>> data = List.of(
                 Map.of(DATE_COLUMN_EXCEL, "15.01.2025 08:45:00", "value", "outOfRange") // Out of range
         );
 
-        // Act
         List<Map<String, String>> result = dateFilter.filter(data);
 
-        // Assert
         assertEquals(0, result.size(), "Expected no rows to pass the filter.");
     }
 
     @Test
     @DisplayName("Filter rows with invalid date format")
     void testFilterInvalidDateFormat() {
-        // Arrange
+
         List<Map<String, String>> data = List.of(
                 Map.of(DATE_COLUMN_EXCEL, "DateFilterTestDate", "value", "invalid") // Invalid format
         );
 
-        // Act
         List<Map<String, String>> result = dateFilter.filter(data);
 
-        // Assert
         assertEquals(0, result.size(), "Expected no rows to pass the filter with invalid dates.");
     }
 
     @Test
     @DisplayName("Filter rows with missing date column")
     void testFilterMissingDateColumn() {
-        // Arrange
+
         List<Map<String, String>> data = List.of(
                 Map.of("value", "missingDate") // Missing date column
         );
 
-        // Act
         List<Map<String, String>> result = dateFilter.filter(data);
 
-        // Assert
         assertEquals(0, result.size(), "Expected no rows to pass the filter without date column.");
     }
 
     @Test
    @DisplayName("Constructor with invalid date strings")
     void testConstructorInvalidDates() {
-        // Act & Assert
+
         assertThrows(ParseException.class, () ->
                         new DateFilter(DATE_COLUMN_EXCEL, "invalid-start", END_DATE, DATE_FORMAT),
                 "Expected constructor to throw ParseException for invalid start date."
