@@ -1,45 +1,40 @@
-# Инструкция по вызову Allure и JaCoCo отчетов через терминал (Mac OS)
+# Instructions for Running Allure and JaCoCo Reports via Terminal (Mac OS)
 
-## Вызов Allure тестов и отчетов
+## Running Allure Tests and Reports
 
-### Запуск тестов с генерацией Allure отчета:
+### Running Tests with Allure Report Generation:
 ```bash
 mvn clean test
 ```
 
-### Открытие Allure отчета локально:
+### Opening Allure Report Locally:
 ```bash
 allure serve target/allure-results
 ```
 
 ---
 
-## Вызов JaCoCo отчетов
+## Running JaCoCo Reports
 
-### Запуск тестов с генерацией JaCoCo отчета:
+### Running Tests with JaCoCo Report Generation:
 ```bash
-mvn clean verify
+mvn clean verify 
 ```
 
-### Открытие JaCoCo отчета локально:
-Откройте сгенерированный HTML-отчет в папке `docs`:
+### Opening JaCoCo Report Locally:
+Open the generated HTML report in the `docs` folder:
 
-1. Откройте файл `index.html` в браузере:
+1. Open the `index.html` file in the browser:
    ```bash
    open docs/index.html
    ```
 
-### Запуск тестов для анотоции @Tag с классификацией юнит, для моих юнит тестов:
+### Running Tests for @Tag Annotation with Unit Classification for Unit Tests:
+```bash
 mvn test -DincludeTags=unit  
+```
 
-### Запуск JaCoCo теста для каждого теста отельно. Стираем папку docs и таргет
-### и после генерации отчёта, открывается JaCoCo отчёт:
-rm -rf target Docs && mvn verify -Dtest=UniqueValuesProcessorTest#testGetUniqueValues_NormalCase && open Docs/index.html
-
-
-
-
-
-mvn verify -Dtest=
-
-open docs/index.html
+### Running JaCoCo Test for Each Test Separately:
+#### This command removes the `docs` and `target` folders, runs the test, generates the report, and then opens it:
+```bash
+rm -rf target docs && mvn verify -Dtest=UniqueValuesProcessorTest#testGetUniqueValues_NormalCase && open docs/index.html
